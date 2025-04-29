@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SearchBar from './SearchBar';
+import '../styles/MainPage.css';
+import React from 'react';
 import MainMenuButton from './MainMenuButton';
 
 function MainPage() {
@@ -32,13 +34,13 @@ function MainPage() {
     <div>
       <p>문서를 업로드하시면, AI가 요약 분석을 도와드립니다.</p>
 
-      {/* 검색바 */}
-      <SearchBar />      
-      {/* 버튼메뉴뉴들 */}
-      <div>
+      <div className="search-container">
+        <SearchBar />  
+      </div>
+          
+      <div className="button-container">
         <MainMenuButton title="문서 업로드" onClick={() => handleButtonClick('문서 업로드')} />
         <MainMenuButton title="게시판" onClick={() => handleButtonClick('게시판')} />
-        {/* <MainMenuButton title="전세가율 분석" onClick={() => handleButtonClick('전세가율 분석')} /> */}
         <MainMenuButton title="로그인" onClick={() => handleButtonClick('로그인')} />
         <MainMenuButton title="마이페이지" onClick={() => handleButtonClick('마이페이지')} />
       
