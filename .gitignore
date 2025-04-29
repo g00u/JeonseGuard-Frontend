@@ -12,6 +12,8 @@
 /build
 
 # misc
+# 환경변수
+.env 
 .DS_Store
 .env.local
 .env.development.local
