@@ -5,10 +5,13 @@ import UploadPage from './components/UploadPage';
 import BoardPage from './components/BoardPage';
 import MyPage from './components/MyPage';
 
+import Login from './components/Login';
+
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+       <Route path="/" element={<Login />} />
+      <Route path="/main" element={<MainPage />} />
       <Route path="/upload" element={<UploadPage />} />
       <Route path="/board" element={<BoardPage />} />
       <Route path="/mypage" element={<MyPage />} />
