@@ -3,20 +3,32 @@ import { Routes, Route } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import UploadPage from './components/UploadPage';
 import BoardPage from './components/BoardPage';
-import MyPage from './components/MyPage';
-
+import ReportPage from './components/ReportPage';
 import Login from './components/Login';
+import MyPage from './components/MyPage';
 
 function App() {
   return (
-    <Routes>
-       <Route path="/" element={<Login />} />
-      <Route path="/main" element={<MainPage />} />
-      <Route path="/upload" element={<UploadPage />} />
-      <Route path="/board" element={<BoardPage />} />
-      <Route path="/mypage" element={<MyPage />} />
-    </Routes>
+    <div className="app-container">
+      <header className="App-header">
+        <h1 style={{ color: '#003cff' }}>전세가드</h1>
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/upload" element={<UploadPage />} />
+          <Route path="/board" element={<BoardPage />} />
+          <Route path="/analysis" element={<ReportPage/>} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </main>
+      <footer style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f8f9fa' }}>
+        <p>© 2025 전세가드. </p>
+      </footer>
+    </div>
   );
+
 }
 
 export default App;
