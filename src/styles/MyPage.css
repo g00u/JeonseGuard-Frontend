@@ -1,0 +1,100 @@
+body {
+    background-color: #f5f6f7;
+  }
+  
+  .mypage-wrapper {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .profile-box {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
+
+  .profile-icon {
+    font-size: 60px;
+    color: #4a4a4a;
+    margin-right: 20px;
+  }
+  
+  
+  .profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .profile-text {
+    flex-grow: 1;
+  }
+  
+  .name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .email {
+    font-size: 14px;
+    color: #555;
+    margin: 4px 0 0 0;
+  }
+  
+  .logout-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .logout-section {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  
+  .logout-section button {
+    background-color: #ff4d4f;
+    color: white;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .section-card {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    background-color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    cursor: pointer;
+  }
+  
+  .section-icon {
+    font-size: 20px;
+    margin-right: 12px;
+    color: #444;
+  }
+  
+  .section-card:hover {
+    background-color: #f0f2f5;
+  }
+  
