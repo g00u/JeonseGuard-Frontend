@@ -1,0 +1,56 @@
+.write-form-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .form-title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: #333;
+  }
+  
+  .write-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .write-form label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #555;
+  }
+  
+  .write-form input,
+  .write-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  .write-form textarea {
+    resize: vertical;
+  }
+  
+  .submit-button {
+    margin-top: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #005dc1;
+  }
+  

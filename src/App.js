@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import UploadPage from './components/UploadPage';
 import BoardPage from './components/BoardPage';
+import BoardDetailPage from './components/BoardDetailPage';
+import WritePage from './components/WritePage';
 import ReportPage from './components/ReportPage';
 import Login from './components/Login';
 import KakaoCallback from './components/KakaoCallback';
@@ -36,6 +38,8 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/upload" element={<UploadPage />} />
             <Route path="/board" element={<BoardPage />} />
+            <Route path="/board/:id" element={<BoardDetailPage />} />
+            <Route path="/board/write" element={<WritePage />} />
             <Route path="/analysis" element={<ReportPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/search" element={<SearchResultPage />} />
