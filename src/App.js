@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import UploadPage from './components/UploadPage';
@@ -27,10 +28,10 @@ function App() {
           전세가드
         </h1>
       </header>
-      <main>
+      <main className="app-main">
         <Routes>
           {/* Layout이 공통 레이아웃을 감싸도록 설정 */}
-          <Route element={<Layout />}>
+          <Route >
             <Route path="/" element={<MainPage />} />
             <Route path="/upload" element={<UploadPage />} />
             <Route path="/board" element={<BoardPage />} />
@@ -47,7 +48,9 @@ function App() {
       <footer style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f8f9fa' }}>
         <p>© 2025 전세가드. </p>
       </footer>
+      <Layout/>
     </div>
+    
     </UserProvider>
 
   );

@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SearchBar from './SearchBar';
+import '../styles/MainPage.css';
+import React from 'react';
 import MainMenuButton from './MainMenuButton';
 import { useUser } from '../context/UserContext'; // UserContext에서 useUser 훅을 가져옴옴.
 

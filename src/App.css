@@ -1,30 +1,28 @@
+.app-container {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
 
+.app-header{
+  background-color: #5f5777;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
 
+}
 
-/* 반응형 스타일 (모바일 등 작은 화면 대응) */
-@media (max-width: 768px) {
-
-  main {
-    padding: 10px;
-  }
-
-  .main-content {
-    padding: 10px 0;
-  }
-
-  header {
-    padding: 20px;
-    font-size: 2rem;
-  }
-
-  button {
-    padding: 12px 24px;
-    font-size: 1rem;
-    max-width: 100%;  /* 작은 화면에서는 꽉 차게 */
-  }
-
-  footer {
-    padding: 15px;
-    font-size: 0.8rem;
-  }
+.app-footer {
+  background-color: #5f5777;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  padding: 16px 0 8px 0;
+  margin-top: auto;
 }
