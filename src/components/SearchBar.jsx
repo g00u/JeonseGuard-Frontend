@@ -1,31 +1,35 @@
-// src/components/searchBar.jsx
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
+import '../styles/MainPage.css';
+
 function SearchBar() {
-    return (
-        <div style={{ margin: '20px 0'}}>
-            <input
-                type = "text"
-                placeholder = "주소 또는 건물명 검색"
-                style={{
-                    // width: '100%',
-                    // padding: '10px',
-                    // borderRadius: '10px',
-                    // border: '1px solid #ccc',
-                    // fontSize: '16px'
-                }}
-            />
-            <button style={{
-                // marginTop: '10px',
-                // padding: '10px 20px',
-                // backgroundColor: '#007BFF',
-                // color: '#fff',
-                // border: 'none',
-                // borderRadius: '5px',
-                // cursor: 'pointer'
-            }}>
-                검색
-            </button>
-        </div>
-    )
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (query.trim()) {
+      navigate(`/search?keyword=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSearch();
+  };
+
+  return (
+    <div className="search-bar-container">
+      <FaSearch className="search-icon" onClick={handleSearch} style={{ cursor: 'pointer' }} />
+      <input
+        type="text"
+        className="search-input"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder='주소 또는 건물명 검색'
+      />
+    </div>
+  );
 }
 
 export default SearchBar;

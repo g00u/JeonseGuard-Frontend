@@ -1,52 +1,41 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchBar from './SearchBar';
 import '../styles/MainPage.css';
 import React from 'react';
-import MainMenuButton from './MainMenuButton';
-import { useUser } from '../context/UserContext'; // UserContext에서 useUser 훅을 가져옴옴.
+import { IoLogoWechat } from "react-icons/io5";
+import { MdDriveFolderUpload } from "react-icons/md";
+import { FaClipboardList } from "react-icons/fa";
+import { IoMdAnalytics } from "react-icons/io";
+
+
 
 function MainPage() {
-  const user = useUser(); //로그인 상태 확인
-  console.log(user);
-  const navigate = useNavigate();
-
-  // 버튼 클릭 시 동작할 함수
-  const handleButtonClick = (buttonName) => {
-    switch(buttonName){
-      case '문서 업로드':
-        navigate('/upload'); // 문서 업로드 페이지로 이동
-        break;
-      case '게시판':
-        navigate('/board'); // 게시판 페이지로 이동
-        break;
-      case '전세가율 분석':
-        navigate('/analysis'); // 전세가율 분석 페이지로 이동
-        break;
-      case '로그인':
-        navigate('/login'); // 리포트 보기 페이지로 이동
-        break;
-      case '마이페이지':
-        navigate('/mypage'); // 리포트 보기 페이지로 이동
-        break;
-      default:
-        break;
-    }
-  };
+  //const user = useUser(); //로그인 상태 확인
+  // console.log(user); // 로그인 상태 확인을 위한 콘솔 로그
+  
 
   return (
-    <div>
-      <p>문서를 업로드하시면, AI가 요약 분석을 도와드립니다.</p>
+    <div className="main-page-container">
+      <div className="main-page-header">
+        <p>문서를 업로드하시면, AI가 요약 분석을 도와드립니다.</p>
+        <SearchBar /> 
+      </div>
 
-      {/* 검색바 */}
-      <SearchBar />  
-
-      {/* 버튼메뉴뉴들 */}
-      <div>
-        <MainMenuButton title="문서 업로드" onClick={() => handleButtonClick('문서 업로드')} />
-        <MainMenuButton title="게시판" onClick={() => handleButtonClick('게시판')} />
-        {/* <MainMenuButton title="전세가율 분석" onClick={() => handleButtonClick('전세가율 분석')} /> */}
-          <MainMenuButton title="마이페이지" onClick={() => handleButtonClick('마이페이지')} />
-      </div>  
+      <div className="menu-btn-container">
+        <div className="menu-btns">
+          <Link to="/upload" className="menu-btn"><MdDriveFolderUpload className="icon"/>문서 업로드</Link>
+        </div>
+        <div className="menu-btns">
+          <Link to="/" className="menu-btn"><IoMdAnalytics className="icon" />전세가율 분석</Link>
+        </div>
+        <div className="menu-btns">
+          <Link to="/board" className="menu-btn"><FaClipboardList className="icon" />게시판</Link>
+        </div>
+        <div className="menu-btns">
+          <Link to="/analysis" className="menu-btn"><IoLogoWechat className="icon" />챗봇 상담</Link>
+        </div>
+      </div>
+  
     </div>
   );
 }

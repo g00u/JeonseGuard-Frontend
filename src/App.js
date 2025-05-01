@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+
 import MainPage from './components/MainPage';
 import UploadPage from './components/UploadPage';
 import BoardPage from './components/BoardPage';
@@ -8,10 +9,10 @@ import ReportPage from './components/ReportPage';
 import Login from './components/Login';
 import KakaoCallback from './components/KakaoCallback';
 import MyPage from './components/MyPage';
+import Layout from './components/Layout';
+import SearchResultPage from './components/SearchResultPage';
 
 import {UserProvider} from './context/UserContext';
-import Layout from './components/Layout';
-import './App.css';
 import { useNavigate } from 'react-router-dom';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
   return (
     <UserProvider>{/* */}
     <div className="app-container">
-      <header className="App-header">
+      <header className="app-header">
         <h1 
           onClick={() => navigate('/')} 
           style={{ cursor: 'pointer' , color: '#003cff' }}
@@ -37,6 +38,7 @@ function App() {
             <Route path="/board" element={<BoardPage />} />
             <Route path="/analysis" element={<ReportPage />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/search" element={<SearchResultPage />} />
           </Route>         
           
           {/* 개별 페이지 라우트 설정 */}
