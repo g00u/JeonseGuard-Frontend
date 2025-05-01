@@ -1,0 +1,24 @@
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    z-index: 999;
+  }
+  
+  .bottom-nav svg {
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .bottom-nav svg:hover {
+    color: #007bff;
+  }
+  

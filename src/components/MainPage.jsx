@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import SearchBar from './SearchBar';
 import MainMenuButton from './MainMenuButton';
+import { useUser } from '../context/UserContext'; // UserContext에서 useUser 훅을 가져옴옴.
 
 function MainPage() {
+  const user = useUser(); //로그인 상태 확인
+  console.log(user);
   const navigate = useNavigate();
 
   // 버튼 클릭 시 동작할 함수
@@ -33,18 +36,15 @@ function MainPage() {
       <p>문서를 업로드하시면, AI가 요약 분석을 도와드립니다.</p>
 
       {/* 검색바 */}
-      <SearchBar />      
+      <SearchBar />  
+
       {/* 버튼메뉴뉴들 */}
       <div>
         <MainMenuButton title="문서 업로드" onClick={() => handleButtonClick('문서 업로드')} />
         <MainMenuButton title="게시판" onClick={() => handleButtonClick('게시판')} />
         {/* <MainMenuButton title="전세가율 분석" onClick={() => handleButtonClick('전세가율 분석')} /> */}
-        <MainMenuButton title="로그인" onClick={() => handleButtonClick('로그인')} />
-        <MainMenuButton title="마이페이지" onClick={() => handleButtonClick('마이페이지')} />
-      
-      </div>
-      
-      
+          <MainMenuButton title="마이페이지" onClick={() => handleButtonClick('마이페이지')} />
+      </div>  
     </div>
   );
 }

@@ -8,29 +8,47 @@ import Login from './components/Login';
 import KakaoCallback from './components/KakaoCallback';
 import MyPage from './components/MyPage';
 
+import {UserProvider} from './context/UserContext';
+import Layout from './components/Layout';
+import './App.css';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
+  
   return (
+    <UserProvider>{/* */}
     <div className="app-container">
       <header className="App-header">
-        <h1 style={{ color: '#003cff' }}>전세가드</h1>
+        <h1 
+          onClick={() => navigate('/')} 
+          style={{ cursor: 'pointer' , color: '#003cff' }}
+        >
+          전세가드
+        </h1>
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/upload" element={<UploadPage />} />
-          <Route path="/board" element={<BoardPage />} />
-          <Route path="/analysis" element={<ReportPage/>} />
+          {/* Layout이 공통 레이아웃을 감싸도록 설정 */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/upload" element={<UploadPage />} />
+            <Route path="/board" element={<BoardPage />} />
+            <Route path="/analysis" element={<ReportPage />} />
+            <Route path="/mypage" element={<MyPage />} />
+          </Route>         
           
-          <Route path="/mypage" element={<MyPage />} />
+          {/* 개별 페이지 라우트 설정 */}
           <Route path="/login" element={<Login/>}/>
           <Route path="/auth/callback/kakao" element={<KakaoCallback />} />
         </Routes>
       </main>
+      
       <footer style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f8f9fa' }}>
         <p>© 2025 전세가드. </p>
       </footer>
     </div>
+    </UserProvider>
 
   );
 
