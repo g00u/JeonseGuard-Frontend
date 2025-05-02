@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MyPage.css';
@@ -9,11 +9,19 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
 
+  useEffect(() =>{
+    if(!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUser(null);
     navigate('/');
   };
+
+  if (!user) return null; // 유저 정보가 없으면 아무것도 렌더링하지 않음
 
   return (
     <div className="mypage-wrapper">
