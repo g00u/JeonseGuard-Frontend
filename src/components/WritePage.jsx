@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
 import '../styles/WritePage.css';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext'; //  setUser 가져오기
+import { useEffect } from 'react';
 
 function WritePage() {
+  const user = useUser(); //로그인 상태 확인
   const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState(''); 
   const [content, setContent] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setAuthor(user.name); // 로그인한 유저의 이름을 가져옴
+      console.log({ user });
+    }
+    
+  }, [user]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ title, author, content });
+    
     alert('글이 작성되었습니다!');
+    navigate('/board');
   };
 
   return (
@@ -25,14 +40,7 @@ function WritePage() {
           required
         />
 
-        <label>작성자</label>
-        <input
-          type="text"
-          placeholder="이름을 입력하세요"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          required
-        />
+        <label>작성자:{author}</label>
 
         <label>내용</label>
         <textarea

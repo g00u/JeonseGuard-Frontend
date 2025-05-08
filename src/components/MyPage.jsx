@@ -31,7 +31,7 @@ const MyPage = () => {
           <div className="profile-box" onClick={() => setShowLogout(!showLogout)}>
             <FaUser className="profile-icon" />
             <div className="profile-text">
-              <p className="name">{user.name || user.nickname || '이름 없음'}</p>
+              <p className="name">{user.name || user.nickname || '이름 없음'}</p> {/* user.name로 가져옴 */}
               <p className="email">{user.email || '이메일 없음'}</p>
             </div>
             <button className="logout-btn">▼</button>
