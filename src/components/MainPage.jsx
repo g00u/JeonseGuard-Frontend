@@ -23,7 +23,7 @@ function MainPage() {
 
       <div className="menu-btn-container">
         <div className="menu-btns">
-          <Link to="/upload" className="menu-btn"><MdDriveFolderUpload className="icon"/>문서 업로드</Link>
+          <Link to="/uploadform" className="menu-btn"><MdDriveFolderUpload className="icon"/>문서 업로드</Link>
         </div>
         <div className="menu-btns">
           <Link to="/" className="menu-btn"><IoMdAnalytics className="icon" />전세가율 분석</Link>
