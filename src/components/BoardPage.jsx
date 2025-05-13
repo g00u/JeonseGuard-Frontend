@@ -1,12 +1,20 @@
-import React from 'react';
+
 // import { Posts } from '../data/boardData'; // 실제 데이터 가져올 경우
-import { dummyPosts } from '../data/dummyPosts'; // 테스트 데이터
+import React, { useEffect, useState } from 'react';
 import '../styles/BoardPage.css';
 import { useNavigate } from 'react-router-dom';
 
 
 function BoardPage() {
   const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+    fetch('/data/dummyPosts.json') // public/data 안의 JSON 파일 접근
+      .then((res) => res.json())
+      .then((data) => setPosts(data))
+      .catch((err) => console.error('게시글 데이터를 불러오는 데 실패했습니다.', err));
+  }, []);
 
   const handleClick = (id) => {
     navigate(`/board/${id}`);
@@ -31,7 +39,7 @@ function BoardPage() {
         <button className="write-button" onClick={handleWrite}>글 작성</button>
       </div>
       <div className="post-list">
-        {dummyPosts.map((post) => (
+        {posts.map((post) => (
           <div key={post.id} className="post-card" onClick={() => handleClick(post.id)}>
             <h3>{post.title}</h3>
             <div className="post-meta">
