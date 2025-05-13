@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/UploadPage.css';
 import { FaPaperclip } from 'react-icons/fa';
-
+import { useNavigate } from 'react-router-dom';
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
@@ -31,6 +32,7 @@ const UploadPage = () => {
       alert('파일 업로드 성공!');
       // 업로드 후 추가 작업 (예: 결과 페이지로 이동 등)
       // navigate('/analysis'); // 예시: 분석 페이지로 이동
+      navigate('/analysis');
 
     } catch (err) {
       console.error('업로드 실패:', err);
