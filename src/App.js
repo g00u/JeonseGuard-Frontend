@@ -1,9 +1,13 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import { FormProvider } from "./context/FormContext";
+import { UserProvider } from "./context/UserContext";
+import { useNavigate } from 'react-router-dom';
 
 import MainPage from './components/MainPage';
-import UploadPage from './components/UploadPage';
+import UploadFile from './components/UploadFile';
+import UploadForm from './components/UploadForm';
 import BoardPage from './components/BoardPage';
 import BoardDetailPage from './components/BoardDetailPage';
 import WritePage from './components/WritePage';
@@ -14,14 +18,14 @@ import MyPage from './components/MyPage';
 import Layout from './components/Layout';
 import SearchResultPage from './components/SearchResultPage';
 
-import {UserProvider} from './context/UserContext';
-import { useNavigate } from 'react-router-dom';
 
 function App() {
   const navigate = useNavigate();
   
   return (
-    <UserProvider>{/* */}
+    <UserProvider>{/* 사용자 정보를 관리하는 Context */}
+    <FormProvider>{/* FormProvider를 사용하여 폼 상태를 관리 */}
+    
     <div className="app-container">
       <header className="app-header">
         <h1 
@@ -36,7 +40,8 @@ function App() {
           {/* Layout이 공통 레이아웃을 감싸도록 설정 */}
           <Route >
             <Route path="/" element={<MainPage />} />
-            <Route path="/upload" element={<UploadPage />} />
+            <Route path="/uploadfile" element={<UploadFile />} />
+            <Route path="/uploadform" element={<UploadForm />} />
             <Route path="/board" element={<BoardPage />} />
             <Route path="/board/:id" element={<BoardDetailPage />} />
             <Route path="/board/write" element={<WritePage />} />
@@ -57,6 +62,7 @@ function App() {
       <Layout/>
     </div>
     
+    </FormProvider>
     </UserProvider>
 
   );
