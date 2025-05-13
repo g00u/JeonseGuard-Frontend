@@ -1,0 +1,112 @@
+.report-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 주소/건물 정보 등 표시되는 카드 UI */
+.report-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  transition: 0.3s ease;
+}
+
+/* 카드 안의 문단 */
+.report-card p {
+  font-size: 16px;
+  color: #333;
+  margin: 12px 0;
+  text-align: left;
+}
+
+.report-card strong {
+  color: #1890ff;
+}
+
+.error-text {
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+/* 그래프 영역 공통 스타일 */
+.chart-wrapper {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.rate-danger {
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.rate-normal {
+  color: #52c41a;
+  font-weight: bold;
+}
+
+/* "자세히 보기" 토글 버튼 */
+.info-toggle-btn {
+  margin-left: 12px;
+  font-size: 13px;
+  background: none;
+  border: none;
+  color: #007aff;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+
+/* 토글 애니메이션 */
+.rate-info-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  max-height: 0;
+}
+
+.rate-info-wrapper.open {
+  max-height: 400px;
+}
+
+/* 설명 박스 스타일 */
+.rate-info {
+  background-color: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #333;
+  padding: 16px 20px;
+  margin-top: 12px;
+  line-height: 1.7;
+  letter-spacing: -0.2px;
+  text-align: left;
+  word-break: keep-all;
+  box-sizing: border-box;
+}
+
+/* 단락 간 여백 */
+.rate-info p {
+  margin: 8px 0;
+}
+
+/* 강조 색상 */
+.highlight-red {
+  color: #d93025;
+  font-weight: bold;
+}
+
+.highlight-blue {   
+  color: #225aa2;
+  font-weight: bold;
+}
