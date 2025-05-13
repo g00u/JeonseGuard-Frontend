@@ -1,11 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 // import { Posts } from '../data/boardData'; // 실제 데이터 가져올 경우
-import {dummyPosts} from '../data/dummyPosts';
+import { useState, useEffect } from 'react';
 
 function BoardDetailPage() {
   const { id } = useParams();
-  const post = dummyPosts.find((p) => p.id === parseInt(id));
+  const [post, setPost] = useState(null);
+
+
+useEffect(() => {
+  fetch('/data/dummyPosts.json')
+    .then((res) => res.json())
+    .then((data) => {
+      const found = data.find((p) => p.id === parseInt(id));
+      setPost(found);
+    })
+    .catch((err) => console.error('게시글 로딩 실패:', err));
+}, [id]);
 
   if (!post) return <p>해당 게시글을 찾을 수 없습니다.</p>;
 
