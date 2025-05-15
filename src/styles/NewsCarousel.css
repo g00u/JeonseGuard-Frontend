@@ -1,0 +1,84 @@
+.news-carousel {
+  max-width: 720px;
+  margin: 0 auto 20px;
+  padding: 20px;
+  background: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.news-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 0 auto;
+  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition: transform 0.2s ease;
+  box-sizing: border-box;
+
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+}
+
+.news-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.news-card h3 {
+  font-size: 1.2rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.news-card p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.news-card small {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.slick-list {
+  padding: 0 16px !important;  
+  box-sizing: border-box;
+  overflow: hidden !important;
+}
+
+.slick-slide {
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+
+.slick-dots {
+  bottom: -20px !important;
+  text-align: center !important;
+  position: relative !important;
+}
+
+.slick-dots li button:before {
+  font-size: 10px !important;
+  color: #ccc !important;
+  opacity: 1 !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #24272a !important;
+  opacity: 1 !important;
+}
+
+@media (min-width: 768px) {
+  .news-card {
+    width: 600px;
+  }
+}

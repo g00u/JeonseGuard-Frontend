@@ -17,22 +17,26 @@ import KakaoCallback from './components/KakaoCallback';
 import MyPage from './components/MyPage';
 import Layout from './components/Layout';
 import SearchResultPage from './components/SearchResultPage';
-
+import NewsPage from './components/NewsPage';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const navigate = useNavigate();
   
+  const handleClickTitle = () => {
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <UserProvider>{/* 사용자 정보를 관리하는 Context */}
     <FormProvider>{/* FormProvider를 사용하여 폼 상태를 관리 */}
     
     <div className="app-container">
       <header className="app-header">
-        <h1 
-          onClick={() => navigate('/')} 
-          style={{ cursor: 'pointer' , color: '#003cff' }}
-        >
-          전세가드
+        <h1 onClick={handleClickTitle}className="page-title" >
+          <span className="logo-icon">🏠</span> 전세가드
         </h1>
       </header>
       <main className="app-main">
@@ -48,6 +52,7 @@ function App() {
             <Route path="/analysis" element={<ReportPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/search" element={<SearchResultPage />} />
+            <Route path="/news" element={<NewsPage />} />
           </Route>         
           
           {/* 개별 페이지 라우트 설정 */}
