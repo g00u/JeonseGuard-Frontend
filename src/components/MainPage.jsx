@@ -28,9 +28,10 @@ function MainPage() {
   const navigate = useNavigate();
 
 useEffect(() => {
-  axios.get('http://localhost:3000/api/news') // 백엔드 실제 API URL 변경 필요요
+  axios.get('https://jeonseguard.duckdns.org/api/v5/news') // 백엔드 실제 API URL 변경 필요요
     .then((res) => {
-      setNewsItems(res.data);
+      console.log("뉴스 데이터:", res.data);
+      setNewsItems(res.data[1]);
       setIsLoading(false);
     })
     .catch((err) => {
@@ -39,18 +40,18 @@ useEffect(() => {
       setNewsItems([
         {
           title: "임시 뉴스 제목 1",
-          summary: "이것은 API 연결 전에 보이는 더미 뉴스입니다.",
-          date: "2025.05.15",
-          url: "#"
+          link: "#",
+          description: "이것은 API 연결 전에 보이는 더미 뉴스입니다.",
+          publishedAt: "2025-05-15"
         },
         {
           title: "임시 뉴스 제목 2",
-          summary: "뉴스 API가 준비되면 이 자리는 실제 뉴스로 바뀝니다.",
-          date: "2025.05.14",
-          url: "#"
+          link: "#",
+          description: "뉴스 API가 준비되면 이 자리는 실제 뉴스로 바뀝니다.",
+          publishedAt: "2025-05-14"
         }
       ]);
-      //setHasError(true);
+      setHasError(true);
       setIsLoading(false);
     });
 }, []);
@@ -99,7 +100,7 @@ useEffect(() => {
             <NewsCarousel items={newsItems} />
             <div className="see-more-button-wrapper">
               <button className="see-more-button" onClick={() => navigate('/news')}>
-                전체 뉴스 더보기
+                 + 전체 뉴스 더보기
               </button>
             </div>
           </>
