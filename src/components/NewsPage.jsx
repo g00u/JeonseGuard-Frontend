@@ -1,42 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../styles/NewsPage.css';
 
-const dummyNews = [
-  {
-    title: "전세가율 하락세 지속",
-    summary: "서울 외곽 지역을 중심으로 전세가율 60% 이하 하락",
-    date: "2025.05.15",
-    url: "#"
-  },
-  {
-    title: "계약 전 확인 필수 항목",
-    summary: "확정일자, 전입신고, 특약사항 주의사항 안내",
-    date: "2025.05.14",
-    url: "#"
-  },
-  {
-    title: "악성 임대인 목록 공개 예정",
-    summary: "전세사기 피해 예방을 위한 공공 데이터 활용 방안",
-    date: "2025.05.12",
-    url: "#"
-  }
-];
-
 function NewsPage() {
+  const [newsItems, setNewsItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    axios.get('https://jeonseguard.duckdns.org/api/v5/news')
+      .then((res) => {
+        setNewsItems(res.data[1]);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("뉴스 로딩 실패:", err);
+        setHasError(true);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div className="news-page-container">
       <h2 className="news-page-title">전체 뉴스</h2>
-      <div className="news-list">
-        {dummyNews.map((item, index) => (
-          <a href={item.url} key={index} className="news-item">
-            <div className="news-item-content">
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <small>{item.date}</small>
-            </div>
-          </a>
-        ))}
-      </div>
+
+      {isLoading ? (
+        <p className="news-loading">뉴스 로딩 중...</p>
+      ) : hasError ? (
+        <p className="news-error">뉴스를 불러오지 못했습니다.</p>
+      ) : (
+        <div className="news-list">
+          {newsItems.map((item, index) => (
+            <a href={item.link} key={index} className="news-item" target="_blank" rel="noopener noreferrer">
+              <div className="news-item-content">
+                <h3>{item.title || "-"}</h3>
+                <p>{item.description || item.summary || ""}</p>
+                <small>{item.publishedAt || item.date}</small>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
