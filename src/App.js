@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import MainPage from './components/MainPage';
 import UploadFile from './components/UploadFile';
-import UploadForm from './components/UploadForm';
+import RadioPage from './components/RadioPage';
 import BoardPage from './components/BoardPage';
 import BoardDetailPage from './components/BoardDetailPage';
 import WritePage from './components/WritePage';
@@ -45,7 +45,7 @@ function App() {
           <Route >
             <Route path="/" element={<MainPage />} />
             <Route path="/uploadfile" element={<UploadFile />} />
-            <Route path="/uploadform" element={<UploadForm />} />
+            <Route path="/uploadform" element={<RadioPage />} />
             <Route path="/board" element={<BoardPage />} />
             <Route path="/board/:id" element={<BoardDetailPage />} />
             <Route path="/board/write" element={<WritePage />} />
