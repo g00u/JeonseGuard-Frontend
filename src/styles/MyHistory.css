@@ -1,0 +1,56 @@
+.mypage-subpage {
+  padding: 24px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.history-card,
+.upload-card,
+.post-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.history-card:hover,
+.upload-card:hover,
+.post-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+button {
+  padding: 8px 16px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #40a9ff;
+}
+
+.button-danger {
+  background-color: #ff4d4f;
+}
+.button-safe {
+  background-color: #52c41a;
+}
+
+.rate-danger {
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.rate-normal {
+  color: #52c41a;
+  font-weight: bold;
+}

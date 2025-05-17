@@ -21,6 +21,12 @@ import NewsPage from './components/NewsPage';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
+import MyUploads from './components/MyUploads';
+import MyPosts from './components/MyPosts';
+import MyHistory from './components/MyHistory';
+
+
+
 function App() {
   const navigate = useNavigate();
   
@@ -53,6 +59,11 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/search" element={<SearchResultPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/mypage/uploads" element={<MyUploads />} />
+            <Route path="/mypage/posts" element={<MyPosts />} />
+            <Route path="/mypage/history" element={<MyHistory />} />
+            <Route path="/report/:id" element={<ReportPage />} />
+
           </Route>         
           
           {/* 개별 페이지 라우트 설정 */}
