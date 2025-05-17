@@ -1,0 +1,17 @@
+.upload-card {
+  background-color: #ffffff;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.rate-danger {
+  color: red;
+  font-weight: bold;
+}
+
+.rate-normal {
+  color: green;
+  font-weight: bold;
+}

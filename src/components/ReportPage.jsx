@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-
+import { useParams } from 'react-router-dom';
 //Chart.js 관련 요소 import
 import {
   Chart as ChartJS,
@@ -34,6 +34,14 @@ ChartJS.register(
 function ReportPage() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`/data/report_${id}.json`)
+      .then(res => res.json())
+      .then(data => setMessage(data));
+  }, [id]);
+
 
 
   useEffect(() => {

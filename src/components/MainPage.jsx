@@ -85,13 +85,13 @@ useEffect(() => {
           <Link to="/uploadform" className="menu-btn"><MdDriveFolderUpload className="icon" />문서 업로드</Link>
         </div>
         <div className="menu-btns">
-          <Link to="/" className="menu-btn"><IoMdAnalytics className="icon" />전세가율 분석</Link>
+          <Link to="/analysis" className="menu-btn"><IoMdAnalytics className="icon" />전세가율 분석</Link>
         </div>
         <div className="menu-btns">
           <Link to="/board" className="menu-btn"><FaClipboardList className="icon" />게시판</Link>
         </div>
         <div className="menu-btns">
-          <Link to="/analysis" className="menu-btn"><IoLogoWechat className="icon" />챗봇 상담</Link>
+          <Link to="/MyPage" className="menu-btn"><IoLogoWechat className="icon" />챗봇 상담</Link>
         </div>
       </div>
 
