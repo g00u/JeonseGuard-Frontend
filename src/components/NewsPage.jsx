@@ -7,18 +7,31 @@ function NewsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
-    axios.get('https://jeonseguard.duckdns.org/api/v5/news')
-      .then((res) => {
-        setNewsItems(res.data[1]);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("뉴스 로딩 실패:", err);
-        setHasError(true);
-        setIsLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  const token = localStorage.getItem("accessToken"); // 저장된 토큰 불러오기
+
+  axios.get('https://jeonseguard.duckdns.org/api/v5/news', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((res) => {
+      setNewsItems(res.data[1]);
+      setIsLoading(false);
+    })
+    .catch((err) => {
+            if (err.response) {
+        console.error("서버 응답 오류:", err.response.status);
+      } else if (err.request) {
+        console.error("요청 실패: CORS 또는 네트워크 문제");
+      } else {
+        console.error("기타 오류:", err.message);
+      }
+      setHasError(true);
+      setIsLoading(false);
+    });
+}, []);
+
 
   return (
     <div className="news-page-container">
