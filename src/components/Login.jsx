@@ -2,15 +2,18 @@ import React from 'react';
 import styles from '../styles/LoginPage.module.css';
 
 const LoginPage = () => {
+
   const kakaoLogin = () => {
-    const REST_API_KEY = process.env.REACT_APP_KAKAO_CLIENT_ID;
-    const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_CLIENT_ID;
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
 
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=profile_nickname,profile_image,account_email`;
+  console.log(' 현재 사용 중인 redirect_uri:', REDIRECT_URI); // ← 추가
 
-    window.location.href = kakaoURL;
-    
-  };
+  const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=profile_nickname,profile_image,account_email`;
+
+  window.location.href = kakaoURL;
+};
+
 
   return (
     <div className={styles.container}>

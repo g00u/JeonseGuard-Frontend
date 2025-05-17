@@ -21,17 +21,17 @@ function formatRelativeTime(dateStr) {
 
 
 function NewsCarousel({ items }) {
-  const CustomPrevArrow = (props) => (
-  <div {...props} className="custom-arrow custom-prev">
-    <FaChevronLeft />
-  </div>
-);
+  const CustomPrevArrow = ({ className, style, onClick }) => (
+    <div className={`custom-arrow custom-prev ${className}`} style={style} onClick={onClick}>
+      <FaChevronLeft />
+    </div>
+  );
 
-const CustomNextArrow = (props) => (
-  <div {...props} className="custom-arrow custom-next">
-    <FaChevronRight />
-  </div>
-);
+  const CustomNextArrow = ({ className, style, onClick }) => (
+    <div className={`custom-arrow custom-next ${className}`} style={style} onClick={onClick}>
+      <FaChevronRight />
+    </div>
+  );
   
   const settings = {
     dots: true,
