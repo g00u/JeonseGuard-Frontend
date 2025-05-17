@@ -20,7 +20,13 @@ useEffect(() => {
       setIsLoading(false);
     })
     .catch((err) => {
-      console.error("뉴스 로딩 실패:", err);
+            if (err.response) {
+        console.error("서버 응답 오류:", err.response.status);
+      } else if (err.request) {
+        console.error("요청 실패: CORS 또는 네트워크 문제");
+      } else {
+        console.error("기타 오류:", err.message);
+      }
       setHasError(true);
       setIsLoading(false);
     });
