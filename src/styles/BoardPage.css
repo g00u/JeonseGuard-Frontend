@@ -1,31 +1,236 @@
 .board-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-    font-family: sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #333;
+}
+
+.board-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.board-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.board-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.write-button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.write-button:hover {
+  background-color: #45a049;
+}
+
+
+.notice-card {
+  background-color: #fff8e1;
+  border-left: 6px solid #ffc107;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  margin: 24px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.post-card:hover {
+    background-color: #f9f9f9;
+  transform: translateY(-4px);
+}
+
+.post-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.post-preview {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.post-meta {
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+}
+
+.board-search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
+  outline: none;
+  transition: box-shadow 0.2s ease;
+  /* margin 제거 - flex 내부니까 필요 없음 */
+  display: block; /* 유지 가능 */
+}
+
+
+
+.board-search-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+/*  소개 문단 */
+.intro-box {
+  background-color: #f9f9f9;
+  border-left: 5px solid #4CAF50;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #444;
+}
+
+/*  글쓰기 버튼 위치 정리 */
+.write-button-wrapper {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.post-preview {
+  font-size: 14px;
+  color: #555;
+  margin: 8px 0 12px;
+  line-height: 1.4;
+}
+.empty-list-message {
+  text-align: center;
+  font-size: 16px;
+  color: #aaa;
+  padding: 40px 0;
+}
+.post-tag {
+  display: inline-block;
+  background-color: #e0f7fa;
+  color: #00796b;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-right: 6px;
+  border-radius: 6px;
+}
+.empty-list-message {
+  text-align: center;
+  font-size: 16px;
+  color: #aaa;
+  padding: 40px 0;
+}
+/* 버튼과 검색창을 나란히 정렬 */
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.write-button {
+  flex-shrink: 0;
+}
+
+.search-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+@media (max-width: 600px) {
+  .action-row {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  .board-title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 16px;
+  .search-wrapper {
+    justify-content: center;
   }
-  .board-header {
-    /* display: flex; */
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
   .write-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    cursor: pointer;
-    font-size: 0.9rem;
+    width: 100%;
+    margin-bottom: 12px;
   }
-  
+}
+.post-list {
+  min-height: 300px; /* ← 리스트 높이가 갑자기 줄지 않게 */
+}
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tag-button {
+  background-color: #f0f0f0;
+  border: none;
+  color: #555;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tag-button:hover {
+  background-color: #e0e0e0;
+}
+
+.tag-button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.post-tags {
+  margin-bottom: 8px;
+}
+
+.post-tag {
+  background-color: #e0f7fa;
+  color: #00796b;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-right: 6px;
+  border-radius: 6px;
+}
