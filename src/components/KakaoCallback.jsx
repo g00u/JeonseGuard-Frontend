@@ -13,7 +13,7 @@ const KakaoCallback = () => {
   useEffect(() => {
     if (code) {
       console.log('카카오에서 받은 code:', code);
-      axios.post(`${API_URL}/api/v5/auth/login`, { code })
+      axios.post(`${API_URL}/auth/login`, { code })
         .then((res) => {
           console.log('백엔드 응답:', res.data);
           const { accessToken, refreshToken } = res.data;
@@ -22,8 +22,10 @@ const KakaoCallback = () => {
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', refreshToken);
 
+          console.log(' accessToken 저장됨:', localStorage.getItem('accessToken'));
+
           // 유저 정보 가져오기
-          axios.get(`${API_URL}/api/v5/user/info`, {
+          axios.get(`${API_URL}/user/info`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             }
@@ -31,6 +33,7 @@ const KakaoCallback = () => {
           .then(userRes => {
             console.log('유저 정보:', userRes.data);
             setUser(userRes.data);
+            console.log('마이페이지 이동동')
             navigate('/mypage');
           })
           .catch(err => {
