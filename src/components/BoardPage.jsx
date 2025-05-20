@@ -24,7 +24,7 @@ function BoardPage() {
   };
 
   const handleWrite = () => {
-    /*
+    // 로그인 여부 확인
     const isLoggedIn = localStorage.getItem('token'); // 로그인 시 저장된 토큰 등
   
     if (!isLoggedIn) {
@@ -32,11 +32,10 @@ function BoardPage() {
       navigate('/login'); // 로그인 페이지로 보내기
       return;
     }
-  */
     navigate('/board/write');
   };
 
-  //  필터링: 검색어 & 태그 모두 반영
+  // 필터링: 검색어 & 태그 모두 반영
   const filteredPosts = posts.filter((post) => {
     const matchKeyword =
       post.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
@@ -47,7 +46,7 @@ function BoardPage() {
     return matchKeyword && matchTag;
   });
 
-  //  태그 전체 목록 추출
+  // 태그 전체 목록 추출
   const allTags = [...new Set(posts.flatMap((p) => p.tags || []))];
 
 return (
