@@ -68,7 +68,7 @@ function App() {
           
           {/* 개별 페이지 라우트 설정 */}
           <Route path="/login" element={<Login/>}/>
-          <Route path="/auth/callback/kakao" element={<KakaoCallback />} />
+          <Route path="/callback/kakao" element={<KakaoCallback />} />
           <Route path="/kakao/callback" element={<KakaoCallback />} />
 
         </Routes>
