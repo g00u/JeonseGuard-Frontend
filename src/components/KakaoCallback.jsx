@@ -22,7 +22,7 @@ const KakaoCallback = () => {
           localStorage.setItem('accessToken', accessToken);
           localStorage.setItem('refreshToken', refreshToken);
 
-          // ➕ 여기서 유저 정보 다시 요청
+          // 유저 정보 가져오기
           axios.get(`${API_URL}/api/v5/user/info`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,

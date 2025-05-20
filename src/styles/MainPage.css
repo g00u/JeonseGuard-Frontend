@@ -26,6 +26,12 @@
   background-color: transparent;
 }
 
+.search-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
 /* Main Page Button */
 .menu-btn-container {
   display: grid;
@@ -61,4 +67,65 @@
 
 .icon {
   font-size: 3rem;              /* 글자크기(16px) 1배  1rem */
+}
+
+/*전체 뉴스 더보기 버튼 */
+
+.see-more-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.see-more-button {
+  background-color: #a5bbe891; /* 연한 회색 */
+  color: #374151; /* 다크 그레이 텍스트 */
+  border: 1px solid #d1d5db; /* 중간 회색 테두리 */
+  font-size: 0.85rem;;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.see-more-button:hover {
+  background-color: #d1d5db;
+  color: #111827;
+  border-color: #9ca3af;
+}
+
+/*메인 헤더 */
+
+.main-page-header {
+  background-color: #f7f9fc;  /* 연한 회색 톤 */
+  padding: 12px 16px 12px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+  box-shadow: none;
+}
+
+.main-page-header p {
+  font-size: 1.05rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+
+.main-page-header .search-bar {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle strong {
+  font-weight: 600;
+  color: #3b49df;
 }

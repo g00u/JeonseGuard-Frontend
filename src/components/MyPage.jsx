@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MyPage.css';
-import { FaFileAlt, FaBullhorn, FaUser, FaCommentDots } from 'react-icons/fa';
+import { FaFileAlt, FaCommentDots, FaHistory, FaUser } from 'react-icons/fa'; 
+
 
 const MyPage = () => {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
+
 
   useEffect(() =>{
     if(!user) {
@@ -15,6 +17,14 @@ const MyPage = () => {
     }
   }, [user, navigate]);
 
+
+  
+  // 컴포넌트 return 전에 로딩 처리 (임시)
+  if (!user) {
+    return <p>로딩 중...</p>;
+  }
+
+  
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUser(null);
@@ -45,17 +55,20 @@ const MyPage = () => {
   
           {/* 기능 섹션 */}
           <div className="section-list">
-            <div className="section-card"> 
-              <FaFileAlt className="section-icon" /> 
-              업로드한 문서
+            
+            <div className="section-card" onClick={() => navigate('/mypage/uploads')}>
+              <FaFileAlt className="section-icon" />
+              내 주소 근처 전세 보기
             </div>
-            <div className="section-card"> 
-              <FaBullhorn className="section-icon" />
-              신고한 게시물
-            </div>
-            <div className="section-card"> 
+
+            <div className="section-card" onClick={() => navigate('/mypage/posts')}>
               <FaCommentDots className="section-icon" />
-              작성한 글 / 댓글
+              내 게시글 및 댓글 보기
+            </div>
+
+            <div className="section-card" onClick={() => navigate('/mypage/history')}>
+              <FaHistory className="section-icon" />
+              분석 히스토리 보기
             </div>
           </div>
         </>

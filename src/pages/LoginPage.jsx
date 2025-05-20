@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../styles/LoginPage.module.css';
 
 const LoginPage = () => {
+
   const kakaoLogin = () => {
     const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API; //카카오  API 키
     const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI; //카카오 리다이렉트 URI

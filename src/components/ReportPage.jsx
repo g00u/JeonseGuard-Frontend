@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-
+import { useParams } from 'react-router-dom';
 //Chart.js 관련 요소 import
 import {
   Chart as ChartJS,
@@ -34,6 +34,14 @@ ChartJS.register(
 function ReportPage() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`/data/report_${id}.json`)
+      .then(res => res.json())
+      .then(data => setMessage(data));
+  }, [id]);
+
 
 
   useEffect(() => {
@@ -52,7 +60,7 @@ function ReportPage() {
 
   // 전세가율 계산
   // 전세가율 = (전세가 / 매매가) * 100
-const jeonseRate = message?.jeonsePrice && message?.salePrice
+const jeonseRate = (message?.jeonsePrice && message?.salePrice>0)
   ? ((message.jeonsePrice / message.salePrice) * 100).toFixed(2)
   : null;
 // 전세가율이 위험한 수준인지 판별
@@ -156,41 +164,75 @@ const [showRateInfo, setShowRateInfo] = useState(false);
             
             {jeonseRate && (
               <>
-              <p>
-                <strong> 전세가율:</strong>{' '}
-                <span className={isJeonseRateDanger ? 'rate-danger' : 'rate-normal'}>
-                  {jeonseRate}%
-                </span>
-                <button
-                 onClick={() => setShowRateInfo(!showRateInfo)}
-                 className="info-toggle-btn"
-                >
-                  {showRateInfo ? '설명 닫기' : '자세히 보기'}{' '}
-                  {showRateInfo ? <FiChevronUp /> : <FiChevronDown />}
-                </button>
-              </p   >
+    
+                <div className="jeonse-rate-section">
+                  <div className="jeonse-gauge-wrapper">
+                    
+                    {/* 위험도 구간 라벨 (안전 ~ 위험) */}
+                    <div className="gauge-level-bar">
+                      <span className="level low">안전</span>
+                      <span className="level mid">보통</span>
+                      <span className="level high">위험</span>
+                    </div>
+
+                    {/* 전세가율 게이지 바 */}
+                    <div className="jeonse-progress-bar-bg">
+                      <div
+                        className={`jeonse-progress-bar-fill ${isJeonseRateDanger ? 'danger' : 'safe'}`}
+                        style={{ width: `${jeonseRate}%` }}
+                      ></div>
+                    </div>
+
+                    {/* 수치: 전세가율: 55.56% */}
+                    <div className="gauge-label-row">
+                      <span className={`gauge-label ${isJeonseRateDanger ? 'danger' : 'safe'}`}>
+                        전세가율: {jeonseRate}%
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 전세가율 설명 토글 */}
+                  <div className="rate-heading-row">
+                    <span className="rate-label">전세가율 분석</span>
+                    <button
+                      className="info-toggle-btn"
+                      onClick={() => setShowRateInfo(!showRateInfo)}
+                    >
+                      {showRateInfo ? '설명 닫기' : '자세히 보기'}{' '}
+                      {showRateInfo ? <FiChevronUp /> : <FiChevronDown />}
+                    </button>
+                  </div>
+                </div>
+
+
 
               {/* 전세가율 설명 */}
               <div className={`rate-info-wrapper ${showRateInfo ? 'open' : ''}`}>
                 <div className="rate-info">
-                  <p>전세가율은 전세 보증금이 매매가 대비 몇 퍼센트인지를 나타냅니다.</p>
-                  <p><b className="highlight-red">70%를 초과하면 집값이 하락할 경우, 보증금을 전부 돌려받기 어려울 수 있어 매우 위험한 상황이 됩니다.</b></p>
-                  <p>이는 <b className="highlight-blue">전세사기의 주요 원인</b> 중 하나로 작용하며,</p>
-                  <p><b className="highlight-blue">실거래가와 보증금 간의 격차를 반드시 확인해야 합니다.</b></p>
+                  <p>
+                    전세가율은 전세 보증금이 매매가 대비 몇 퍼센트인지를 나타냅니다.
+                  </p>
+                  <p>
+                    <span className="highlight-red">
+                      ⚠️ 70%를 초과하면 집값이 하락할 경우, 보증금을 전부 돌려받기 어려울 수 있어 매우 위험한 상황이 됩니다.
+                    </span>
+                  </p>
+                  <p>
+                    이는 <span className="highlight-blue">전세사기의 주요 원인</span> 중 하나로 작용하며,
+                  </p>
+                  <p>
+                    <span className="highlight-blue">실거래가와 보증금 간의 격차를 반드시 확인해야 합니다.</span>
+                  </p>
                 </div>
+
+                {/* 위험도 간단 표시 (위/안전) */}
+                <p className={`rate-risk-level ${isJeonseRateDanger ? 'danger' : ''}`}>
+                  전세가율 위험도: {isJeonseRateDanger ? '⚠️ 위험' : '안전'}
+                </p>
               </div>
 
-                {/* 위험도 경고 메시지 */}
-                {isJeonseRateDanger && (
-                    <p className="rate-danger">
-                      ⚠️ 전세가율이 {jeonseRate}%로 70%를 초과하여 <strong>위험</strong>할 수 있습니다.
-                    </p>
-                )}
                 </>
             )}
-              <p><strong> 전세가율 위험도:</strong> {isJeonseRateDanger ? '위험' : '안전'}</p>
-          
-
           </div>
 
           {/* Bar Chart */}

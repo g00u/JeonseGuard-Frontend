@@ -1,85 +1,166 @@
+/* 전체 컨테이너 */
 .upload-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  .upload-container h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .upload-container input[type="file"] {
-    margin-bottom: 16px;
-  }
-  
-  .image-preview {
-    margin-top: 20px;
-  }
-  
-  .image-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .upload-container button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #0066ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 0;
-  }
-  
-  .upload-container button:hover {
-    background-color: #004ec2;
-  }
-  .upload-label {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .upload-label:hover {
-    background-color: #0056b3;
-  }
-  
-  .file-name {
-    font-size: 14px;
-    color: #444;
-    margin-top: 8px;
-  }
-  .upload-button {
-    background-color: #4d70ff;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    font-size: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .upload-button:hover {
-    background-color: #3358e3;
-  }
-  
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
 
-  
-  
+/* 이미지 업로드 영역 (드래그 포함) */
+.preview-box {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 16px auto;
+  max-width: 360px;
+  max-height: 500px;
+  overflow: hidden;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+
+.preview-box.drag-over {
+  border: 2px dashed #3b82f6;
+  background-color: #e0f2fe;
+}
+
+/* 업로드 전 대기 상태 */
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  width: 100%;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+/* input 숨기기 */
+.file-input {
+  display: none;
+}
+
+/* 업로드 버튼 */
+.upload-button {
+  width: 100%;
+  background-color: #22c55e;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.upload-button:hover {
+  background-color: #16a34a;
+}
+
+/* 안내 문구 */
+.upload-guide {
+  margin-top: 16px;
+  font-size: 0.75rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* 이미지 미리보기 wrapper */
+.preview-image-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 실제 이미지 */
+.preview-image-wrapper img,
+.preview-box img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* 삭제 버튼 (오른쪽 상단) */
+.remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: white;
+  color: #ef4444;
+  font-size: 0.7rem;
+  border: 1px solid #ef4444;
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.remove-btn:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+/* 다시 선택 버튼 (왼쪽 상단) */
+.reselect-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #ffffff;
+  color: #3b82f6;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #3b82f6;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 10;
+  white-space: nowrap;
+  width: fit-content;
+  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;
+}
+
+.reselect-btn:hover {
+  background-color: #eff6ff;
+}
+
+/* 주택유형 출력 박스 */
+.radio-preview-box {
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* 주택유형 다시 선택 버튼 */
+.change-radio-btn {
+  margin-top: 6px;
+  background-color: #ffffff;
+  color: #3b82f6;
+  border: 1px solid #d1d5db;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.change-radio-btn:hover {
+  background-color: #f0f9ff;
+  border-color: #93c5fd;
+}
+
+/*  파일/주택유형 정보 출력 */
+.selection-summary {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
