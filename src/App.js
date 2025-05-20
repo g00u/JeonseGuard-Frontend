@@ -12,11 +12,14 @@ import BoardPage from './components/BoardPage';
 import BoardDetailPage from './components/BoardDetailPage';
 import WritePage from './components/WritePage';
 import ReportPage from './components/ReportPage';
-import Login from './components/Login';
+import SearchResultPage from './components/SearchResultPage';
+
+// import KakaoLoginButton from './components/KakaoLoginButton';
+import Login from './pages/LoginPage';
 import KakaoCallback from './components/KakaoCallback';
+
 import MyPage from './components/MyPage';
 import Layout from './components/Layout';
-import SearchResultPage from './components/SearchResultPage';
 import NewsPage from './components/NewsPage';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";

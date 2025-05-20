@@ -1,3 +1,4 @@
+import React from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaUpload } from 'react-icons/fa';
 import '../styles/Layout.css'; 

@@ -10,23 +10,13 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
 
-  /*
+
   useEffect(() =>{
     if(!user) {
       navigate('/login');
     }
   }, [user, navigate]);
-  */
-  useEffect(() => {
-    // 로그인 안 된 경우 임시 개발자 계정 세팅(임시)
-    if (!user) {
-      setUser({
-        name: '테스트 님',
-        email: 'test@jeonseguard.com',
-        id: 1
-      });
-    }
-  }, [user, setUser]);
+
 
   
   // 컴포넌트 return 전에 로딩 처리 (임시)
@@ -41,7 +31,7 @@ const MyPage = () => {
     navigate('/');
   };
 
-  //if (!user) return null; // 유저 정보가 없으면 아무것도 렌더링하지 않음
+  if (!user) return null; // 유저 정보가 없으면 아무것도 렌더링하지 않음
 
   return (
     <div className="mypage-wrapper">
