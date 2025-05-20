@@ -9,6 +9,8 @@ function NewsPage() {
 useEffect(() => {
   const token = localStorage.getItem("accessToken");
   const API_URL = process.env.REACT_APP_API_URL;
+  
+  console.log(" API_URL:", API_URL); 
 
   axios.get(`${API_URL}/news`, {
     headers: {
