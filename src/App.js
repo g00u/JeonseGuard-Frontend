@@ -8,15 +8,20 @@ import { useNavigate } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import UploadFile from './components/UploadFile';
 import UploadForm from './components/UploadForm';
-import BoardPage from './components/BoardPage';
-import BoardDetailPage from './components/BoardDetailPage';
-import WritePage from './components/WritePage';
+
+import BoardListPage from './pages/BoardListPage';
+import BoardWritePage from './pages/BoardWritePage';
+import BoardDetailPage from './pages/BoardDetailPage';
+
 import ReportPage from './components/ReportPage';
-import Login from './components/Login';
+import SearchResultPage from './components/SearchResultPage';
+
+// import KakaoLoginButton from './components/KakaoLoginButton';
+import Login from './pages/LoginPage';
 import KakaoCallback from './components/KakaoCallback';
+
 import MyPage from './components/MyPage';
 import Layout from './components/Layout';
-import SearchResultPage from './components/SearchResultPage';
 
 
 function App() {
@@ -42,9 +47,14 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/uploadfile" element={<UploadFile />} />
             <Route path="/uploadform" element={<UploadForm />} />
-            <Route path="/board" element={<BoardPage />} />
-            <Route path="/board/:id" element={<BoardDetailPage />} />
-            <Route path="/board/write" element={<WritePage />} />
+
+
+          <Route path="/board" element={<BoardListPage />} />
+          <Route path="/board/:category" element={<BoardListPage />} />
+          <Route path="/board/:category/write" element={<BoardWritePage />} />
+          <Route path="/board/posts/:postId" element={<BoardDetailPage />} />
+
+
             <Route path="/analysis" element={<ReportPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/search" element={<SearchResultPage />} />
@@ -53,6 +63,8 @@ function App() {
           {/* 개별 페이지 라우트 설정 */}
           <Route path="/login" element={<Login/>}/>
           <Route path="/auth/callback/kakao" element={<KakaoCallback />} />
+          {/* <Route path="/auth/kakao/callback" element={<KakaoLoginButton />} /> */}
+          {/* <Route path="/oauth/kakao/callback" element={<KakaoCallback />} /> */}
         </Routes>
       </main>
       
