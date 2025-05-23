@@ -37,7 +37,7 @@ function MainPage() {
   const navigate = useNavigate();
 
 useEffect(() => {
-  axios.get(`${process.env.REACT_APP_API_URL}/api/v5/news`)// 백엔드 실제 API URL 변경 필요요
+  axios.get(`${process.env.REACT_APP_API_URL}/news`)// 백엔드 실제 API URL 변경 필요요
     .then((res) => {
       console.log("뉴스 데이터:", res.data);
       setNewsItems(res.data[1]);

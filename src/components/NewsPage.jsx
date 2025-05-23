@@ -6,31 +6,30 @@ function NewsPage() {
   const [newsItems, setNewsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-
 useEffect(() => {
-  const token = localStorage.getItem("accessToken"); // 저장된 토큰 불러오기
+  const token = localStorage.getItem("accessToken");
+  const API_URL = process.env.REACT_APP_API_URL;
+  
+  console.log(" API_URL:", API_URL); 
 
-  axios.get('https://jeonseguard.duckdns.org/api/v5/news', {
+  axios.get(`${API_URL}/news`, {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: token ? `Bearer ${token}` : undefined
     }
   })
     .then((res) => {
-      setNewsItems(res.data[1]);
+      console.log("뉴스 응답:", res.data);
+      const newsList = Array.isArray(res.data) ? res.data[1] : []; // 안정 처리
+      setNewsItems(newsList || []);
       setIsLoading(false);
     })
     .catch((err) => {
-            if (err.response) {
-        console.error("서버 응답 오류:", err.response.status);
-      } else if (err.request) {
-        console.error("요청 실패: CORS 또는 네트워크 문제");
-      } else {
-        console.error("기타 오류:", err.message);
-      }
+      console.error("뉴스 로딩 오류:", err.response?.data || err.message);
       setHasError(true);
       setIsLoading(false);
     });
 }, []);
+
 
 
   return (
@@ -42,20 +41,41 @@ useEffect(() => {
       ) : hasError ? (
         <p className="news-error">뉴스를 불러오지 못했습니다.</p>
       ) : (
-        <div className="news-list">
-          {newsItems.map((item, index) => (
-            <a href={item.link} key={index} className="news-item" target="_blank" rel="noopener noreferrer">
-              <div className="news-item-content">
-                <h3>{item.title || "-"}</h3>
-                <p>{item.description || item.summary || ""}</p>
-                <small>{item.publishedAt || item.date}</small>
-              </div>
-            </a>
-          ))}
-        </div>
+      <div className="news-list">
+        {newsItems.map((item, index) => (
+          <a
+            href={item.link}
+            key={index}
+            className="news-item"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="news-item-content">
+              <h3>{item.title || "-"}</h3>
+              <p>{item.description || item.summary || ""}</p>
+              <small>{formatDate(item.publishedAt || item.date)}</small>
+            </div>
+          </a>
+        ))}
+      </div>
+
       )}
     </div>
   );
+}
+
+// 날짜를 보기 좋게 포맷하는 함수
+function formatDate(dateString) {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date)) return dateString;
+  return date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
 }
 
 export default NewsPage;
