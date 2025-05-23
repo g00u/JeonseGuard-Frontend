@@ -9,8 +9,12 @@ const KakaoCallback = () => {
   const { setUser } = useUser(); 
   const code = searchParams.get('code');
   const API_URL = process.env.REACT_APP_API_URL;
+  console.log("Redirect URI:", process.env.REACT_APP_KAKAO_REDIRECT_URI);
+  console.log(' KakaoCallback 컴포넌트 로드됨');
+  console.log(' 전달받은 code:', code)
 
   useEffect(() => {
+    console.log(' useEffect 실행됨');
     if (code) {
       console.log('카카오에서 받은 code:', code);
       axios.post(`${API_URL}/auth/login`, { code })

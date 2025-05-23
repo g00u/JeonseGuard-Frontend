@@ -37,15 +37,7 @@ function ReportPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`/data/report_${id}.json`)
-      .then(res => res.json())
-      .then(data => setMessage(data));
-  }, [id]);
-
-
-
-  useEffect(() => {
-    fetch('/data/dummyResult.json')  // public 폴더 기준 경로
+    fetch(`/data/report_${id}.json`)  // public 폴더 기준 경로
       .then((res) => res.json())
       .then((data) => {
         setMessage(data);
@@ -56,7 +48,7 @@ function ReportPage() {
         setMessage(null);
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   // 전세가율 계산
   // 전세가율 = (전세가 / 매매가) * 100
@@ -183,7 +175,7 @@ const [showRateInfo, setShowRateInfo] = useState(false);
                       ></div>
                     </div>
 
-                    {/* 수치: 전세가율: 55.56% */}
+                    {/* 수치: 전세가율:*/}
                     <div className="gauge-label-row">
                       <span className={`gauge-label ${isJeonseRateDanger ? 'danger' : 'safe'}`}>
                         전세가율: {jeonseRate}%
