@@ -79,3 +79,27 @@
   font-size: 15px;
   margin-top: 8px;
 }
+
+
+.chart-wrapper {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+/* canvas 직접 제어 */
+.chart-wrapper canvas {
+  height: 400px !important;
+  width: 100% !important;
+}
+
+.chart-wrapper h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+}
