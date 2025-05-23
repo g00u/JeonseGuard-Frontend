@@ -58,7 +58,7 @@ const MyPage = () => {
             
             <div className="section-card" onClick={() => navigate('/mypage/uploads')}>
               <FaFileAlt className="section-icon" />
-              내 주소 근처 전세 보기
+              실거래가 조회
             </div>
 
             <div className="section-card" onClick={() => navigate('/mypage/posts')}>

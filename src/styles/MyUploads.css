@@ -1,17 +1,81 @@
-.upload-card {
-  background-color: #ffffff;
-  padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+.mypage-subpage {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #333;
 }
 
+/* 🔍 입력 영역 */
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.input-section input,
+.input-section select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.input-section button {
+  padding: 10px;
+  background-color: #1890ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.input-section button:hover {
+  background-color: #1474cc;
+}
+
+/* 📄 카드 스타일 */
+.upload-card {
+  background-color: #ffffff;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.upload-card:hover {
+  transform: translateY(-2px);
+}
+
+.upload-card p {
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+/* ⚠️ 전세가율 표시 */
 .rate-danger {
-  color: red;
+  color: #ff4d4f;
   font-weight: bold;
 }
 
 .rate-normal {
-  color: green;
+  color: #52c41a;
   font-weight: bold;
+}
+
+/* 📃 거래 리스트 영역 */
+.transaction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 📝 안내 문구 */
+.mypage-subpage p {
+  font-size: 15px;
+  margin-top: 8px;
 }
