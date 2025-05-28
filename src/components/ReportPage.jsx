@@ -36,19 +36,30 @@ function ReportPage() {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  useEffect(() => {
-    fetch(`/data/report_${id}.json`)  // public 폴더 기준 경로
-      .then((res) => res.json())
-      .then((data) => {
-        setMessage(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('메시지 불러오기 실패:', err);
-        setMessage(null);
-        setLoading(false);
-      });
-  }, [id]);
+useEffect(() => {
+  const baseUrl = process.env.REACT_APP_API_URL;
+  fetch(`${baseUrl}/report/${id}`) //백엔드 API 주소로..변경필요
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`파일 없음 또는 서버 오류 (${res.status})`);
+      }
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("응답 형식이 JSON이 아님");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setMessage(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error('메시지 불러오기 실패:', err.message);
+      setMessage(null);
+      setLoading(false);
+    });
+}, [id]);
+
 
   // 전세가율 계산
   // 전세가율 = (전세가 / 매매가) * 100
@@ -131,6 +142,11 @@ const [showRateInfo, setShowRateInfo] = useState(false);
       legend: { position: 'bottom' },
     },
   };
+  const formatCurrency = (amount) => {
+  if (!amount && amount !== 0) return '-';
+  return Number(amount).toLocaleString('ko-KR');
+};
+
 
   // 렌더링 영역 시작
     return (
@@ -149,10 +165,10 @@ const [showRateInfo, setShowRateInfo] = useState(false);
             <p><strong> 주소:</strong> {message.address}</p>
             <p><strong> 건물 유형:</strong> {message.buildingType}</p>
             <p><strong> 층수:</strong> {message.floor}</p>
-            <p><strong> 전세가:</strong> {message.jeonsePrice} 원</p>
-            <p><strong> 매매가:</strong> {message.salePrice} 원</p>
-            <p><strong> 계약금:</strong> {message.contractPay} 원</p>
-            <p><strong> 잔금:</strong> {message.balancePay} 원</p>
+            <p><strong> 전세가:</strong> {formatCurrency(message.jeonsePrice)} 원</p>
+            <p><strong> 매매가:</strong> {formatCurrency(message.salePrice)} 원</p>
+            <p><strong> 계약금:</strong> {formatCurrency(message.contractPay)} 원</p>
+            <p><strong> 잔금:</strong> {formatCurrency(message.balancePay)} 원</p>
             
             {jeonseRate && (
               <>
@@ -228,17 +244,17 @@ const [showRateInfo, setShowRateInfo] = useState(false);
           </div>
 
           {/* Bar Chart */}
-          <div className="chart-wrapper">
+          <div className="report-chart-wrapper">
             <Bar data={barData} options={barOptions} />
           </div>
 
           {/* Line Chart */}
-          <div className="chart-wrapper">
+          <div className="report-chart-wrapper">
             <Line data={lineData} options={lineOptions} />
           </div>
 
           {/* Pie Chart */}
-          <div className="chart-wrapper">
+          <div className="report-chart-wrapper">
             <Pie data={pieData} options={pieOptions} />
           </div>
         </>
