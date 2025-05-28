@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import '../styles/MyUploads.css';
 import {
   Chart as ChartJS,
@@ -36,6 +36,7 @@ const MyUploads = () => {
   const [ji, setJi] = useState('');
   const [floorNumber, setFloorNumber] = useState('');
   const [typeCode, setTypeCode] = useState(0);
+  const [area, setArea] = useState('');
 
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -55,6 +56,8 @@ const MyUploads = () => {
     const requestBody = { address, bun };
     if (ji.trim() !== '') requestBody.ji = ji;
     if (floorNumber.trim() !== '') requestBody.floorNumber = floorNumber;
+    if (area.trim() !== '') requestBody.area = area;
+
 
     setLoading(true);
     fetch(apiUrl, {
@@ -166,6 +169,8 @@ const MyUploads = () => {
         <input type="text" placeholder="번" value={bun} onChange={e => setBun(e.target.value)} />
         <input type="text" placeholder="지(없으면 0)" value={ji} onChange={e => setJi(e.target.value)} />
         <input type="text" placeholder="층수" value={floorNumber} onChange={e => setFloorNumber(e.target.value)} />
+        <input type="text" placeholder="면적 (㎡)" value={area} onChange={e => setArea(e.target.value)} />
+
         <select value={typeCode} onChange={e => setTypeCode(Number(e.target.value))}>
           <option value={0}>아파트</option>
           <option value={1}>오피스텔</option>
