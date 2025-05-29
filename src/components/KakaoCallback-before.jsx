@@ -13,7 +13,11 @@ const KakaoCallBack = () => {
     const code = searchParams.get('code');
     if (code) {
       axios
-        .post(`${API_URL}/user/info`, { code }) // ✅ 실제 백엔드 주소 사용
+        .post(`${API_URL}/auth/login`, { code },{
+          headers:{
+            'Content-Type': 'application/json',
+          }
+        }) // 실제 백엔드 주소 사용
         .then((res) => {
           const { token, userInfo } = res.data; // 예: 백엔드에서 반환된 JWT와 사용자 정보
           login(userInfo, token);               // 전역 상태 저장
@@ -21,7 +25,7 @@ const KakaoCallBack = () => {
         })
         .catch((err) => {
           console.error('카카오 로그인 실패:', err);
-          navigate('/'); // 실패 시 홈으로 이동
+          navigate('/'); 
         });
     }
   }, [API_URL, login, navigate, searchParams]);
