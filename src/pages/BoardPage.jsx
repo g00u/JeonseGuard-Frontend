@@ -4,10 +4,13 @@ import React, { useEffect, useState } from 'react';
 import '../styles/BoardPage.css';
 import { useNavigate } from 'react-router-dom';
 import BoardService from '../services/BoardService'; // 실제 서비스 경로로 변경
+import { useUser } from '../context/UserContext';
 
 
 function BoardPage() {
   console.log('BoardPage 렌더링');
+  const { user } = useUser(); // 사용자 정보 가져오기
+  console.log('현재 사용자:', user); // 현재 사용자 정보 확인
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -17,6 +20,8 @@ function BoardPage() {
   const [reportBoards, setReportBoards] = useState([]);
 
   useEffect(() => {
+
+
     BoardService.getBoards('prevention')
       .then((res) => {
         setPreventionBoards(res.data.posts[1]);
@@ -101,7 +106,8 @@ function BoardPage() {
 
 return (
   <div className="board-container">
-
+    <p>사용자 : {user.nickname}</p>
+    
     {/* 공지사항  */}
     <div className="notice-card">
       📢 <strong>공지사항:</strong> 공지사항 내용!
@@ -177,7 +183,9 @@ return (
       )}
     </div> 
 
-    <div> {/* 뉴 리스트트 */}
+
+
+    <div> {/* 게시글 일부 출력력 */}
       <h2 className="text-center">Prevention Boards List</h2>
       <div className="row">
         {renderBoardTable(preventionBoards)}

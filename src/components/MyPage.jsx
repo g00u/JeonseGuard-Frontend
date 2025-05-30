@@ -10,7 +10,7 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
 
-
+ 
   useEffect(() =>{
     if(!user) {
       navigate('/login');
