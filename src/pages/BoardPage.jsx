@@ -1,85 +1,197 @@
+
+// import { Posts } from '../data/boardData'; // 실제 데이터 가져올 경우
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import PostForm from '../components/PostForm';
+import '../styles/BoardPage.css';
+import { useNavigate } from 'react-router-dom';
+import BoardService from '../services/BoardService'; // 실제 서비스 경로로 변경
 
-const BoardPage = () => {
+
+function BoardPage() {
+  console.log('BoardPage 렌더링');
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
-  const [editingPost, setEditingPost] = useState(null);
-  const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
-  const API_URL = process.env.REACT_APP_API_URL;
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
 
-  const fetchPosts = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/api/posts`);
-      setPosts(res.data);
-    } catch (err) {
-      console.error('게시글 불러오기 실패', err);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    if (!window.confirm('정말 삭제하시겠습니까?')) return;
-    try {
-      await axios.delete(`${API_URL}/api/posts/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      fetchPosts();
-    } catch (err) {
-      alert('삭제 실패: ' + err.message);
-    }
-  };
+  const [preventionBoards, setPreventionBoards] = useState([]);
+  const [reportBoards, setReportBoards] = useState([]);
 
   useEffect(() => {
-    fetchPosts();
+    BoardService.getBoards('prevention')
+      .then((res) => {
+        setPreventionBoards(res.data.posts[1]);
+        console.log('prevention 불러오기 성공', res.data.posts[1]);
+      })
+      .catch((err) => console.error('prevention 불러오기 실패', err));
+
+    BoardService.getBoards('report')
+      .then((res) => {
+        setReportBoards(res.data.posts[1]);
+        console.log('report 불러오기 성공', res.data.posts[1]);
+
+      })
+      .catch((err) => console.error('report 불러오기 실패', err));
   }, []);
 
-  return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">📋 게시판</h2>
+  const renderBoardTable = (boards) => (
+    <table className="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>글 번호</th>
+          <th>타이틀</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>댓글 수</th>
+          <th>좋아요 수</th>
+        </tr>
+      </thead>
+      <tbody>
+        {boards?.map((board, index) => (
+        
+          <tr >
+            <td>{board.postId}</td>
+            <td>{board.title}</td>
+            <td>{board.creator}</td>
+            <td>{new Date(board.createdDateTime).toLocaleString()}</td>
+            <td>{board.commentCount}</td>
+            <td>{board.heartCount}</td>
+          </tr>
+          
+        ))}
+      </tbody>
+    </table>
+  );
 
-      {user && (
-        <PostForm
-          onPostSuccess={fetchPosts}
-          editingPost={editingPost}
-        />
-      )}
+  //   useEffect(() => {
+  //   fetch('/data/dummyPosts.json') // public/data 안의 JSON 파일 접근
+  //     .then((res) => res.json())
+  //     .then((data) => setPosts(data))
+  //     .catch((err) => console.error('게시글 데이터를 불러오는 데 실패했습니다.', err));
+  // }, []);
 
-      {!user && (
-        <div className="text-center text-gray-600 mb-4">
-          로그인 후 글 작성이 가능합니다.
-        </div>
-      )}
+  const handleClick = (id) => {
+    navigate(`/board/${id}`);
+  };
 
-      <div className="space-y-4">
-        {posts.map(post => (
-          <div key={post.id} className="bg-white shadow p-4 rounded">
-            <h3 className="text-xl font-bold">{post.title}</h3>
-            <p className="text-gray-700">{post.content}</p>
-            <div className="text-sm text-gray-500 mt-2">
-              작성자: {post.author}
-            </div>
-            {user?.name === post.author && (
-              <div className="mt-2 space-x-2">
-                <button
-                  className="text-blue-500 hover:underline"
-                  onClick={() => setEditingPost(post)}
-                >
-                  수정
-                </button>
-                <button
-                  className="text-red-500 hover:underline"
-                  onClick={() => handleDelete(post.id)}
-                >
-                  삭제
-                </button>
-              </div>
-            )}
-          </div>
+  const handleWrite = () => {
+    // 로그인 여부 확인
+    const isLoggedIn = localStorage.getItem('accessToken'); // 로그인 시 저장된 액세스 토큰큰
+  
+    if (!isLoggedIn) {
+      alert('로그인이 필요합니다.');
+      navigate('/login'); // 로그인 페이지로 보내기
+      return;
+    }
+    navigate('/board/write');
+  };
+
+  //필터링: 검색어 & 태그 모두 반영
+  const filteredPosts = posts.filter((post) => {
+    const matchKeyword =
+      post.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchKeyword.toLowerCase());
+
+    const matchTag = selectedTag === '' || post.tags?.includes(selectedTag);
+
+    return matchKeyword && matchTag;
+  });
+
+  //태그 전체 목록 추출
+  const allTags = [...new Set(posts.flatMap((p) => p.tags || []))];
+
+return (
+  <div className="board-container">
+
+    {/* 공지사항  */}
+    <div className="notice-card">
+      📢 <strong>공지사항:</strong> 공지사항 내용!
+    </div>
+
+    {/* 안내 문구 박스 */}
+    <div className="intro-box">
+      <p>
+        JeonseGuard 커뮤니티에 오신 걸 환영합니다!<br />
+        전세 계약에 대한 고민, 질문, 경험 등을 자유롭게 나눠보세요.
+      </p>
+    </div>
+
+          {/* 태그 필터 UI */}
+      <div className="tag-filter">
+        <button
+          className={selectedTag === '' ? 'tag-button active' : 'tag-button'}
+          onClick={() => setSelectedTag('')}
+        >
+          전체 보기
+        </button>
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            className={selectedTag === tag ? 'tag-button active' : 'tag-button'}
+            onClick={() => setSelectedTag(tag)}
+          >
+            {tag}
+          </button>
         ))}
       </div>
+
+    {/* 글쓰기 버튼 + 검색창을 같이 묶음 */}
+    <div className="action-row">
+      <button className="write-button" onClick={handleWrite}>글 작성하기</button>
+      <div className="search-wrapper">
+        <input
+          type="text"
+          placeholder="검색어를 입력해주세요"
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          className="board-search-input"
+        />
+      </div>
     </div>
-  );
-};
+
+
+    {/*  게시글 리스트 */}
+    <div className="post-list">
+      {filteredPosts.map((post) => (
+        <div key={post.id} className="post-card" onClick={() => handleClick(post.id)}>
+          <h3>{post.title}</h3>
+          <p className="post-preview">
+            {post.content?.substring(0, 60) || "내용 없음"}...
+          </p>
+   
+          {/* 태그 리스트 */}
+          <div className="post-tags">
+            {post.tags?.map((tag) => (
+              <span key={tag} className="post-tag">{tag}</span>
+            ))}
+          </div>
+
+          <div className="post-meta">
+            <span>{post.author}</span>
+            <span>{post.date}</span>
+          </div>
+        </div>
+      ))}
+     
+      {filteredPosts.length === 0 && (
+        <div className="empty-list-message">검색 결과가 없습니다.</div>
+      )}
+    </div> 
+
+    <div> {/* 뉴 리스트트 */}
+      <h2 className="text-center">Prevention Boards List</h2>
+      <div className="row">
+        {renderBoardTable(preventionBoards)}
+      </div>
+
+      <hr />
+      <h2 className="text-center">Report Boards List</h2>
+      <div className="row">
+        {renderBoardTable(reportBoards)}
+      </div>
+    </div>
+  </div>
+);
+
+}
 
 export default BoardPage;

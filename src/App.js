@@ -8,9 +8,14 @@ import { useNavigate } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import UploadFile from './components/UploadFile';
 import RadioPage from './components/RadioPage';
-import BoardPage from './components/BoardPage';
-import BoardDetailPage from './components/BoardDetailPage';
-import WritePage from './components/WritePage';
+
+import BoardPage from './pages/BoardPage';
+// import BoardPage from './components/BoardListComponent';
+import BoardDetailPage from './pages/BoardDetailPage';
+import BoardCreatePage from './pages/BoardCreatePage';
+import PreventionBoard from './pages/BoardPreventionPage';
+import ReportBoard from './pages/BoardReportPage';
+
 import ReportPage from './components/ReportPage';
 import SearchResultPage from './components/SearchResultPage';
 
@@ -55,9 +60,13 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/uploadfile" element={<UploadFile />} />
             <Route path="/uploadform" element={<RadioPage />} />
+
             <Route path="/board" element={<BoardPage />} />
             <Route path="/board/:id" element={<BoardDetailPage />} />
-            <Route path="/board/write" element={<WritePage />} />
+            <Route path="/board/write" element={<BoardCreatePage />} />
+            <Route path="/prevention" element={<PreventionBoard />} />
+            <Route path="/report" element={<ReportBoard />} />
+
             <Route path="/analysis" element={<ReportPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/search" element={<SearchResultPage />} />

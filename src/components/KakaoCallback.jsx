@@ -52,7 +52,7 @@ const KakaoCallback = () => {
     }
   }, [code, API_URL, navigate, setUser]);
 
-  return <div>카카오 로그인 처리 중...(임시)</div>;
+  return <div>카카오 로그인 처리 중...</div>;
 };
 
 export default KakaoCallback;
