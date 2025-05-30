@@ -34,7 +34,7 @@ function BoardDetailPage() {
         </button>
       <h2 className="detail-title">{post.title}</h2>
       <div className="detail-meta">
-        <span>{post.author}</span>
+        <span>{post.creator}</span>
         <span>{post.date}</span>
       </div>
       <hr />

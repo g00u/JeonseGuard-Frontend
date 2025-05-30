@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from '../context/UserContext';
@@ -13,7 +13,7 @@ const KakaoCallback = () => {
   useEffect(() => {
     if (code) {
       console.log('카카오에서 받은 code:', code);
-      axios.post(`${API_URL}/api/v5/auth/login`, { code })
+      axios.post(`${API_URL}/auth/login`, { code })
         .then((res) => {
           console.log('백엔드 응답:', res.data);
           const { accessToken, refreshToken } = res.data;
@@ -23,7 +23,7 @@ const KakaoCallback = () => {
           localStorage.setItem('refreshToken', refreshToken);
 
           // 유저 정보 가져오기
-          axios.get(`${API_URL}/api/v5/user/info`, {
+          axios.get(`${API_URL}/user/info`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             }
@@ -45,7 +45,7 @@ const KakaoCallback = () => {
     }
   }, [code, API_URL, navigate, setUser]);
 
-  return <div>카카오 로그인 처리 중...(임시)</div>;
+  return <div>카카오 로그인 처리 중...</div>;
 };
 
 export default KakaoCallback;

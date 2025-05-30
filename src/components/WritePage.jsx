@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
 import '../styles/WritePage.css';
 import { useNavigate } from 'react-router-dom';
-//import { useUser } from '../context/UserContext'; //  setUser 가져오기
-//import { useEffect } from 'react';
+import { useUser } from '../context/UserContext'; //  setUser 가져오기
+// import { useEffect } from 'react';
+
+// 카테고리 report, prevention -> url로 전달
 
 function WritePage() {
- // const user = useUser(); //로그인 상태 확인
+ const {user} = useUser(); //로그인 상태 확인
   const [title, setTitle] = useState('');
   //const [author, setAuthor] = useState('임시사용자'); 
-  const author = '임시사용자'; // 임시로 작성자 이름을 설정
+  const author = user.nickname; // 임시로 작성자 이름을 설정
   const [content, setContent] = useState('');
   const navigate = useNavigate();
-
-  /*
-  useEffect(() => {
-    if (user) {
-      setAuthor(user.name); // 로그인한 유저의 이름을 가져옴
-      console.log({ user });
-    }
-    
-  }, [user]);
-  */ 
 
 
   const handleSubmit = (e) => {
