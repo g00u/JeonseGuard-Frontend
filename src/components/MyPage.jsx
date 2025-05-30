@@ -26,10 +26,12 @@ const MyPage = () => {
 
   
   const handleLogout = () => {
-    localStorage.removeItem('token');
+
+    localStorage.removeItem('accessToken');
     setUser(null);
     navigate('/');
   };
+
 
   if (!user) return null; // 유저 정보가 없으면 아무것도 렌더링하지 않음
 

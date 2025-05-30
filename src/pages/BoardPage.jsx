@@ -79,16 +79,19 @@ function BoardPage() {
   };
 
   const handleWrite = () => {
-    // 로그인 여부 확인
-    const isLoggedIn = localStorage.getItem('accessToken'); // 로그인 시 저장된 액세스 토큰큰
-  
-    if (!isLoggedIn) {
+    const token = localStorage.getItem('accessToken');
+    console.log('현재 토큰:', token); // 토큰 확인용 로그
+
+    // 빈 문자열, null, "null", undefined 다 걸러냄
+    if (!token || token === 'null' || token === 'undefined') {
       alert('로그인이 필요합니다.');
-      navigate('/login'); // 로그인 페이지로 보내기
+      navigate('/login');
       return;
     }
+
     navigate('/board/write');
   };
+
 
   //필터링: 검색어 & 태그 모두 반영
   const filteredPosts = posts.filter((post) => {
@@ -106,7 +109,7 @@ function BoardPage() {
 
 return (
   <div className="board-container">
-    <p>사용자 : {user.nickname}</p>
+    
     
     {/* 공지사항  */}
     <div className="notice-card">
