@@ -8,6 +8,7 @@ const UploadFile = () => {
   const { radioValue, imageFile, setImageFile } = useForm();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [setAnalysisResult] = useState(null);
   const navigate = useNavigate();
 
   // 미리보기 URL 생성
@@ -53,17 +54,25 @@ const UploadFile = () => {
   };
 
   const handleSubmit = async () => {
-    if (radioValue && imageFile) {
-      await sendDataToBackend(radioValue, imageFile);
-      alert('전송 완료!');
+    if (imageFile) {
+      try {
+        const result = await sendDataToBackend( imageFile);
+        const uploadedName = result.filename; 
+        setAnalysisResult(result);
+        alert('분석 완료!');
+        navigate(`/ai-report/${uploadedName}`);
+      } catch {
+        alert('분석에 실패했습니다. 서버 상태를 확인해주세요.');
+      }
     } else {
-      alert('주택 유형과 파일을 모두 선택해주세요.');
+      alert('이미지를 선택해주세요.');
     }
   };
 
   const handleResetImage = () => {
     setImageFile(null);
     setPreviewUrl(null);
+    setAnalysisResult(null);
   };
 
   return (
@@ -133,7 +142,7 @@ const UploadFile = () => {
       )}
 
       <button onClick={handleSubmit} className="upload-button mt-4">
-        업로드
+        AI 분석 요청
       </button>
 
       <p className="upload-guide">

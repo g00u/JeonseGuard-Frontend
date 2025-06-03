@@ -33,6 +33,7 @@ import MyUploads from './components/MyUploads';
 import MyPosts from './components/MyPosts';
 import MyHistory from './components/MyHistory';
 
+import AIReportPage from './components/AIReportPage';
 
 
 function App() {
@@ -60,6 +61,8 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/uploadfile" element={<UploadFile />} />
             <Route path="/uploadform" element={<RadioPage />} />
+            <Route path="/report" element={<ReportPage />} />
+            <Route path="/ai-report/:name" element={<AIReportPage />} />
 
             <Route path="/board" element={<BoardPage />} />
             <Route path="/board/:postId" element={<BoardDetailPage />} /> {/** board detail page 에서 설정한 것과 똑같이 */}
