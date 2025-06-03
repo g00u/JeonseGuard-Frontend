@@ -24,7 +24,7 @@ function BoardPage() {
 
     BoardService.getBoards('prevention')
       .then((res) => {
-        setPreventionBoards(res.data.posts[1]);
+        setPreventionBoards(res.data.posts[1]); // posts[1]이 포스트 내용임 
         console.log('prevention 불러오기 성공', res.data.posts[1]);
       })
       .catch((err) => console.error('prevention 불러오기 실패', err));
@@ -53,7 +53,7 @@ function BoardPage() {
       <tbody>
         {boards?.map((board, index) => (
         
-          <tr >
+          <tr key={board.postId} onClick={() => handleClick(board.postId)} style={{ cursor: 'pointer' }}>
             <td>{board.postId}</td>
             <td>{board.title}</td>
             <td>{board.creator}</td>
@@ -74,8 +74,8 @@ function BoardPage() {
   //     .catch((err) => console.error('게시글 데이터를 불러오는 데 실패했습니다.', err));
   // }, []);
 
-  const handleClick = (id) => {
-    navigate(`/board/${id}`);
+  const handleClick = (postId) => {
+    navigate(`/board/${postId}`);
   };
 
   const handleWrite = () => {
@@ -158,10 +158,10 @@ return (
     </div>
 
 
-    {/*  게시글 리스트 */}
+    {/*  검색 결과 게시글 리스트 */}
     <div className="post-list">
       {filteredPosts.map((post) => (
-        <div key={post.id} className="post-card" onClick={() => handleClick(post.id)}>
+        <div key={post.postId} className="post-card" onClick={() => handleClick(post.postId)}>
           <h3>{post.title}</h3>
           <p className="post-preview">
             {post.content?.substring(0, 60) || "내용 없음"}...
@@ -188,7 +188,7 @@ return (
 
 
 
-    <div> {/* 게시글 일부 출력력 */}
+    <div> {/* 게시글 일부 출력 */}
       <h2 className="text-center">Prevention Boards List</h2>
       <div className="row">
         {renderBoardTable(preventionBoards)}
