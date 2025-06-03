@@ -62,7 +62,7 @@ function App() {
             <Route path="/uploadform" element={<RadioPage />} />
 
             <Route path="/board" element={<BoardPage />} />
-            <Route path="/board/:id" element={<BoardDetailPage />} />
+            <Route path="/board/:postId" element={<BoardDetailPage />} /> {/** board detail page 에서 설정한 것과 똑같이 */}
             <Route path="/board/write" element={<BoardCreatePage />} />
             <Route path="/prevention" element={<PreventionBoard />} />
             <Route path="/report" element={<ReportBoard />} />

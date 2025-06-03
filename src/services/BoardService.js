@@ -10,7 +10,7 @@ class BoardService {
  
     // 2. 게시글 작성
     createBoard(category, postData) {
-        const token = localStorage.getItem('accessToken'); // 정확한 키 확인
+        const token = localStorage.getItem('accessToken'); // 액세스 토큰 가져오기 
         return axios.post(`${API_URL}/post/${category}`, postData, {
             headers: {
             Authorization: `Bearer ${token}`,
@@ -21,7 +21,12 @@ class BoardService {
 
     // 3. 게시글 상세 조회 
     getBoardDetail(postId) {
-        return axios.get(`${API_URL}/post/${postId}`);
+        const token = localStorage.getItem('accessToken'); // 
+        return axios.get(`${API_URL}/post/${postId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
     }
 
     // 4. 게시글 수정
