@@ -1,0 +1,19 @@
+import axios from 'axios';
+
+export const sendDataToBackend = async (radioValue, imageFile) => {
+  const formData = new FormData();
+  formData.append('file', imageFile);
+
+  try {
+    const response = await axios.post('http://localhost:8000/upload_image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    console.log('AI 분석 결과:', response.data);
+    return response.data; //  백엔드가 준 분석 결과 JSON
+  } catch (error) {
+    console.error(' AI 분석 요청 실패:', error);
+    throw error;
+  }
+};
