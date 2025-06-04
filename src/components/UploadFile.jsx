@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/UploadFile.css';
 
 const UploadFile = () => {
-  const { radioValue, imageFile, setImageFile } = useForm();
+  const { imageFile, setImageFile } = useForm();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [ , setAnalysisResult] = useState(null);
@@ -22,13 +22,6 @@ const UploadFile = () => {
     }
   }, [imageFile]);
 
-  // 라디오 선택 안 된 경우 리디렉션
-  useEffect(() => {
-    if (!radioValue) {
-      alert('주택 유형을 먼저 선택해주세요.');
-      navigate('/uploadform');
-    }
-  }, [radioValue, navigate]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -58,7 +51,7 @@ const UploadFile = () => {
   const handleSubmit = async () => {
     if (imageFile) {
       try {
-         setIsLoading(true); // 로딩 시작작
+         setIsLoading(true); // 로딩 시작
         const result = await sendDataToBackend(imageFile);
         console.log('AI 분석 결과:', result);
 
