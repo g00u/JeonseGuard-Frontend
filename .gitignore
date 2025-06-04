@@ -31,3 +31,4 @@ yarn-error.log*
 .yarn/
 .pnpm-store/
 
+.merge-develop.sh

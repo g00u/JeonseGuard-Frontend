@@ -164,3 +164,16 @@
   margin-bottom: 12px;
   line-height: 1.6;
 }
+
+.selected-file {
+  margin-bottom: 20px !important;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+
+.divider-line {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
