@@ -82,7 +82,7 @@ useEffect(() => {
       {/* 메뉴 버튼 */}
       <div className="menu-btn-container">
         <div className="menu-btns">
-          <Link to="/uploadform" className="menu-btn"><MdDriveFolderUpload className="icon" />문서 업로드</Link>
+          <Link to="/uploadfile" className="menu-btn"><MdDriveFolderUpload className="icon" />문서 업로드</Link>
         </div>
         <div className="menu-btns">
           <Link to="/analysis" className="menu-btn"><IoMdAnalytics className="icon" />전세가율 분석</Link>
