@@ -128,11 +128,13 @@ const UploadFile = () => {
       </div>
 
       {imageFile && (
-        <div className="text-sm text-gray-700 text-center mt-4">
-          📄 <strong>선택된 파일:</strong> {imageFile.name}
-        </div>
+        <>
+          <div className="text-sm text-gray-700 text-center mt-4">
+            📄 <strong>선택된 파일:</strong> {imageFile.name}
+          </div>
+          <hr style={{ margin: '20px 0', border: 'none', borderTop: '1px solid #ddd' }} />
+        </>
       )}
-
 
       <button onClick={handleSubmit} className="upload-button mt-4" disabled={isLoading}>
         {isLoading ? '분석 중...' : 'AI 분석 요청'}
