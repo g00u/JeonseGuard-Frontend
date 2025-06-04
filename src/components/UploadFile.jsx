@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from '../context/FormContext';
-import { sendDataToBackend } from '../api/sendData';
+import { sendDataToBackend } from '../api/sendDataToBackend';
 import { useNavigate } from 'react-router-dom';
 import '../styles/UploadFile.css';
 
@@ -8,8 +8,10 @@ const UploadFile = () => {
   const { radioValue, imageFile, setImageFile } = useForm();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [setAnalysisResult] = useState(null);
+  const [ , setAnalysisResult] = useState(null);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
 
   // 미리보기 URL 생성
   useEffect(() => {
@@ -56,16 +58,27 @@ const UploadFile = () => {
   const handleSubmit = async () => {
     if (imageFile) {
       try {
-        const result = await sendDataToBackend( imageFile);
-        const uploadedName = result.filename; 
-        setAnalysisResult(result);
+         setIsLoading(true); // 로딩 시작작
+        const result = await sendDataToBackend(imageFile);
+        console.log('AI 분석 결과:', result);
+
+        sessionStorage.setItem("aiReportData", JSON.stringify(result));
         alert('분석 완료!');
-        navigate(`/ai-report/${uploadedName}`);
-      } catch {
-        alert('분석에 실패했습니다. 서버 상태를 확인해주세요.');
+        navigate(`/ai-report/${result.filename}`, { state: result });
+      
+      } catch (error) {
+        console.error('AI 분석 요청 실패:', error);
+        
+        if (error.response) {
+          alert(`서버 응답 오류: ${error.response.status} - ${error.response.statusText}`);
+        } else if (error.request) {
+          alert('서버에 연결되지 않았습니다. 서버가 실행 중인지 확인하세요.');
+        } else {
+          alert('분석 요청 중 알 수 없는 오류가 발생했습니다.');
+        }
+      }finally {
+        setIsLoading(false); // 로딩 상태 해제
       }
-    } else {
-      alert('이미지를 선택해주세요.');
     }
   };
 
@@ -121,28 +134,15 @@ const UploadFile = () => {
         />
       </div>
 
-
-
-      {/* 선택된 주택유형 + 다시 선택 */}
-      {radioValue !== null && (
-        <div className="selection-summary text-sm text-gray-700 text-center mt-4 space-y-1">
-        <p>📄 <strong>선택된 파일:</strong> {imageFile?.name}</p>
-        <p>🏠 <strong>선택한 주택 유형:</strong> {
-          radioValue === '0' ? '아파트' :
-          radioValue === '1' ? '오피스텔' :
-          '연립다세대'
-        }</p>
-          <button
-            onClick={() => navigate('/uploadform')}
-            className="change-radio-btn"
-          >
-             ↺ 주택유형 다시 선택하기
-          </button>
+      {imageFile && (
+        <div className="text-sm text-gray-700 text-center mt-4">
+          📄 <strong>선택된 파일:</strong> {imageFile.name}
         </div>
       )}
 
-      <button onClick={handleSubmit} className="upload-button mt-4">
-        AI 분석 요청
+
+      <button onClick={handleSubmit} className="upload-button mt-4" disabled={isLoading}>
+        {isLoading ? '분석 중...' : 'AI 분석 요청'}
       </button>
 
       <p className="upload-guide">
