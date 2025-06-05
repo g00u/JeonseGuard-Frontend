@@ -15,7 +15,7 @@
   padding: 8px;
   margin: 16px auto;
   max-width: 360px;
-  max-height: 500px;
+  max-height: 600px;
   overflow: hidden;
   background-color: #f9fafb;
   display: flex;
@@ -36,7 +36,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 240px;
+  height: 320px;
   width: 100%;
   color: #9ca3af;
   cursor: pointer;
@@ -60,6 +60,12 @@
 
 .upload-button:hover {
   background-color: #16a34a;
+}
+
+.upload-button:disabled {
+  background-color: #9ca3af; /* 회색으로 변경 */
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /* 안내 문구 */
@@ -176,4 +182,11 @@
   margin: 20px 0;
   border: none;
   border-top: 1px solid #ddd;
+}
+.upload-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937; /* tailwind 기준 text-gray-800 */
+  margin-bottom: 1.5rem;
 }
