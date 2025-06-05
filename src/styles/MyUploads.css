@@ -1,76 +1,99 @@
 .mypage-subpage {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 24px;
+  max-width: 880px;
+  margin: 48px auto;
+  padding: 32px;
   font-family: 'Noto Sans KR', sans-serif;
-  color: #333;
+  color: #222;
+  background-color: #fefefe;
 }
 
-/* 🔍 입력 영역 */
+/* 입력 영역 */
 .input-section {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  background: #f5f9ff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #cbe2ff;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.03);
 }
 
 .input-section input,
 .input-section select {
-  padding: 10px;
-  border: 1px solid #ddd;
+  flex: 1 1 180px;
+  min-width: 150px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 15px;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.input-section input:focus,
+.input-section select:focus {
+  border-color: #1890ff;
+  outline: none;
 }
 
 .input-section button {
-  padding: 10px;
+  padding: 12px 24px;
   background-color: #1890ff;
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  flex: 1 1 150px;
 }
 
 .input-section button:hover {
   background-color: #1474cc;
+  transform: translateY(-1px);
 }
 
-/* 📄 카드 스타일 */
+/*  거래 카드 */
 .upload-card {
   background-color: #ffffff;
   padding: 16px 20px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s;
+  border-left: 5px solid #1890ff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .upload-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .upload-card p {
   margin: 4px 0;
   font-size: 15px;
+  line-height: 1.5;
 }
 
-/* 📃 거래 리스트 영역 */
+
+/*  거래 리스트 */
 .transaction-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+/*  전세가 추이 그래프 */
 .chart-wrapper {
-  margin-top: 32px;
-  margin-bottom: 32px;
-  background: #f0f8ff; /* 밝은 푸른 배경 */
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid #91caff; /* 푸른색 테두리 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background: #fafafa;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid #686a6c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   overflow-x: auto;
 }
 
@@ -80,22 +103,145 @@
 }
 
 .chart-wrapper h3 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   text-align: center;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #373b3f;
+}
+
+/*  요약 박스 (전세가율 + 평균가) */
+.summary-box {
+  margin: 24px 0;
+  background-color: #fdfdfd;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border-left: 3px solid #93c3f0;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.03);
+  font-size: 15px;
+  color: #333;
+
+}
+
+.summary-box h3 {
+  font-size: 20px;
+  color: #1c4e83;
   margin-bottom: 16px;
+}
+
+/*  전세가율 리스트 */
+.summary-box ul {
+   display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-box ul li {
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  transition: background-color 0.2s;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/*  전세가율 강조 색상 */
+.summary-box ul li strong {
   color: #005cbf;
 }
 
-.summary-box {
-  margin: 20px 0;
-  background-color: #f9f9f9;
-  padding: 16px 20px;
-  border-radius: 8px;
-  border-left: 4px solid #1890ff; /* 왼쪽 파란색 바 */
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
-  font-size: 15px;
-  color: #333;
-  line-height: 1.6;
+
+
+span.rate-fail {
+  color: #999;
+  font-weight: normal;
 }
+
+span.rate-ok {
+  color: #1890ff;
+  font-weight: bold;
+}
+.summary-box li .rate-ok {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+/* ⚠️ 전세가율 없음 회색 */
+.summary-box li .rate-fail {
+  color: #999;
+  
+  font-weight: normal;
+}
+
+/* 전세 없음 표시 배경 강조 */
+.summary-box li.jeonse-missing {
+  background-color: #fff5f5;
+  border-left-color: #ff4d4f;
+}
+
+/*  매매 없음 표시 배경 강조 */
+.summary-box li.sale-missing {
+  background-color: #f0f8ff;
+  border-left-color: #1890ff;
+}
+
+/*  둘 다 없음 */
+.summary-box li.both-missing {
+  background-color: #f5f5f5;
+  border-left-color: #bbb;
+  font-style: italic;
+  color: #999;
+}
+
+/* 모바일 대응 */
+@media (max-width: 640px) {
+  .input-section {
+    flex-direction: column;
+  }
+
+  .input-section input,
+  .input-section select,
+  .input-section button {
+    flex: 1 1 100%;
+  }
+
+  .chart-wrapper {
+    padding: 16px;
+  }
+}
+
+.empty-result {
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+  margin-top: 24px;
+  padding: 20px;
+  background-color: #f6f6f6;
+  border-radius: 10px;
+}
+
+.single-data-note {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  margin-top: -10px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.03);
+  font-style: italic;
+}
+
+
 
