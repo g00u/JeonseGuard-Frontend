@@ -91,10 +91,7 @@ const UploadFile = () => {
 
   return (
     <div className="upload-container">
-      <h2 className="upload-title flex items-center justify-center gap-2 text-2xl font-bold text-gray-800 mb-6">
-        <span role="img" aria-label="icon">📄</span>
-        계약서 이미지 업로드
-      </h2>
+    <h2 className="upload-title">계약서 이미지 업로드</h2>
 
       <div
         className={`preview-box ${isDragging ? 'drag-over' : ''}`}
