@@ -7,8 +7,7 @@ export const sendDataToBackend = async (imageFile) => {
 
   try {
     const response = await axios.post(
-      //"https://jeonseguard.duckdns.org/upload_image", // AI 분석 엔드포인트
-      "http://localhost:8000/upload_image", // 로컬 개발용 엔드포인트
+      "http://34.22.71.169:8000/upload_image", 
       formData,
       {
         headers: {

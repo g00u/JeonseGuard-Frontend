@@ -60,14 +60,22 @@ const UploadFile = () => {
         navigate(`/ai-report/${result.filename}`, { state: result });
       
       } catch (error) {
-        console.error('AI 분석 요청 실패:', error);
-        
+        console.error('🔴 AI 분석 요청 실패:', error);
+
         if (error.response) {
-          alert(`서버 응답 오류: ${error.response.status} - ${error.response.statusText}`);
+          // 서버가 응답했지만 에러 상태코드(4xx, 5xx)
+          console.error("📡 응답 데이터:", error.response.data);
+          console.error("📡 응답 상태코드:", error.response.status);
+          console.error("📡 응답 헤더:", error.response.headers);
+          alert(`서버 응답 오류: ${error.response.status} - ${error.response.statusText}\n${JSON.stringify(error.response.data)}`);
         } else if (error.request) {
+          // 요청은 전송되었지만 응답 없음
+          console.error("🕸️ 요청은 갔지만 응답이 없습니다:", error.request);
           alert('서버에 연결되지 않았습니다. 서버가 실행 중인지 확인하세요.');
         } else {
-          alert('분석 요청 중 알 수 없는 오류가 발생했습니다.');
+          // 요청 구성 중 에러 발생
+          console.error("⚙️ 요청 설정 중 에러 발생:", error.message);
+          alert('분석 요청 중 알 수 없는 오류가 발생했습니다.\n' + error.message);
         }
       }finally {
         setIsLoading(false); // 로딩 상태 해제
