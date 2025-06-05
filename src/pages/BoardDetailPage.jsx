@@ -1,24 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import boardService from '../services/BoardService';
+import '../styles/BoardDetailPage.css';
+import { useUser } from '../context/UserContext';
+import heartImg from '../assets/heart.png';
 
 const BoardDetailPage = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [count, setCount] = useState(0); // 초기값 0으로 설정
   const navigate = useNavigate();
+  const { user } = useUser();
 
+  // 게시글 상세 불러오기
   useEffect(() => {
-    console.log(`Fetching post with ID: ${postId}`);
     boardService.getBoardDetail(postId)
       .then(response => {
-        console.log(' 응답 내용:', response);  
         setPost(response.data);
+        setCount(response.data.heartCount || 0); // 서버에서 받아온 좋아요 수 설정
       })
       .catch(error => {
-        console.error(' API 호출 실패:', error); 
+        console.error('API 호출 실패:', error);
       });
   }, [postId]);
 
+  // 좋아요 여부 확인 (localStorage)
+  useEffect(() => {
+    boardService.getBoardDetail(postId)
+      .then(response => {
+        setPost(response.data);
+        setCount(response.data.heartCount || 0);
+        setLiked(response.data.heartStatus || false); // 서버에서 좋아요 상태 제공 시
+      })
+      .catch(error => {
+        console.error('API 호출 실패:', error);
+      });
+  }, [postId]);
+
+  // 좋아요 처리
+  const handleLike = () => {
+  if (liked || user?.nickname === post?.creator) return;
+
+  boardService.likeBoard(postId)
+    .then((response) => {
+      setCount(response.data.heartCount);
+      setLiked(response.data.heartStatus);
+
+      // localStorage에 저장
+      const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+      likedPosts.push(postId);
+      localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+    })
+    .catch((error) => {
+      console.error('좋아요 실패:', error);
+    });
+  };
 
   if (!post) return <div>로딩 중...</div>;
 
@@ -27,12 +64,29 @@ const BoardDetailPage = () => {
       <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
       <p className="text-sm text-gray-500 mb-4">작성자: {post.creator}</p>
       <p className="mb-6">{post.content}</p>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        onClick={() => navigate(`/${postId}/edit`)}
-      >
-        수정
-      </button>
+
+      {/* 수정 버튼: 작성자만 표시 */}
+      {user?.nickname === post.creator && (
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+          onClick={() => navigate(`/${postId}/edit`)}
+        >
+          수정
+        </button>
+      )}
+
+      {/* 좋아요 버튼: 작성자 제외, 중복 방지 */}
+      {user?.nickname !== post.creator && (
+        <button
+          onClick={handleLike}
+          disabled={liked}
+          className="ml-4"
+          style={{ cursor: liked ? 'not-allowed' : 'pointer' }}
+        >
+          <img src={heartImg} alt="좋아요" width="24" height="24" />
+          <span className="ml-1">{count}</span>
+        </button>
+      )}
     </div>
   );
 };
