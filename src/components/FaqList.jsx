@@ -11,7 +11,7 @@ function FaqList({ faqItems, collapsible = false }) {
 
   return (
     <div className="faq-list">
-      <h2>자주 묻는 질문</h2>
+      <h2>전세사기 예방 관련 FAQ</h2>
       {faqItems.map((item, index) => (
         <div className="faq-card" key={index}>
           <div className="faq-header" onClick={() => collapsible && toggle(index)}>

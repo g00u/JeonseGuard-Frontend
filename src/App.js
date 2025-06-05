@@ -33,7 +33,7 @@ import MyPosts from './components/MyPosts';
 import MyHistory from './components/MyHistory';
 
 import AIReportPage from './components/AIReportPage';
-
+import FaqPage from './components/FaqPage';
 
 function App() {
   const navigate = useNavigate();
@@ -77,6 +77,8 @@ function App() {
             <Route path="/mypage/posts" element={<MyPosts />} />
             <Route path="/mypage/history" element={<MyHistory />} />
             <Route path="/report/:id" element={<ReportPage />} />
+            
+            <Route path="/faq" element={<FaqPage />} />
 
           </Route>         
           
