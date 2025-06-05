@@ -20,8 +20,6 @@ function BoardPage() {
   const [reportBoards, setReportBoards] = useState([]);
 
   useEffect(() => {
-
-
     BoardService.getBoards('prevention')
       .then((res) => {
         setPreventionBoards(res.data.posts[1]); // posts[1]이 포스트 내용임 
