@@ -60,3 +60,9 @@
   margin-top: 8px;
   line-height: 1.6;
 }
+
+.info-box p {
+  margin-bottom: 6px;
+  color: #374151; /* text-gray-700 */
+  font-size: 14px;
+}

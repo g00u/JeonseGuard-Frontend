@@ -65,10 +65,13 @@ function AIReportPage() {
       <div className="report-section">
         <h3>부동산 정보</h3>
         <div className="info-box">
-          <p><strong>주소:</strong> {data.part1.address}</p>
+          <p><strong>주소:</strong> {data.part1.address} {data.part1.dongName} {data.part1.hoName}</p>
           <p><strong>구조/용도:</strong> {data.part1.structUse}</p>
           <p><strong>보증금:</strong> {data.part1.deposit}원</p>
+          <p><strong>계약금:</strong> {data.part1.downPayment}원</p>
+          <p><strong>중도금:</strong> {data.part1.interimPayment}원 ({data.part1.interimDate})</p>
           <p><strong>잔금일자:</strong> {data.part1.balanceDate}</p>
+          <p><strong>전용면적:</strong> {data.part1.exclArea}㎡</p>
         </div>
       </div>
 

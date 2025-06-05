@@ -11,7 +11,7 @@ const Layout = () => {
       <Outlet />
       <div className="bottom-nav">
         <FaHome onClick={() => navigate('/')} />
-        <FaUpload onClick={() => navigate('/uploadform')} />
+        <FaUpload onClick={() => navigate('/uploadfile')} />
         <FaUser onClick={() => navigate('/mypage')} />
       </div>
     </>
