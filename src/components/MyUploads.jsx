@@ -48,8 +48,8 @@ const MyUploads = () => {
     else if (typeCode === 1) apiUrl = `${base}/transaction/jeonse/officetel`;
     else if (typeCode === 2) apiUrl = `${base}/transaction/jeonse/rowhouse`;
 
-    if (!address || !bun) {
-      alert('주소와 번은 필수 입력입니다.');
+    if (!address.trim() || !bun.trim() || !ji.trim() || !floorNumber.trim() || !area.trim()) {
+      alert('주소, 번, 지, 층수, 면적을 모두 입력해야 합니다.');
       return;
     }
 
@@ -91,75 +91,60 @@ const MyUploads = () => {
   return pyeong.toFixed(1); // 소수점 첫째 자리까지 표시
 };
 
-  const getPriceSummaryData = () => {
-    const grouped = {};
-    transactionHistory.forEach(item => {
-      const month = `${item.contractYearMonth.slice(0, 4)}.${item.contractYearMonth.slice(4)}`;
-      const rawPrice = item.price?.replace(/,/g, '');
-      const price = Number(rawPrice) / 100000000;
-      if (!grouped[month]) grouped[month] = [];
-      if (!isNaN(price)) grouped[month].push(price);
-    });
+const getYAxisRange = (dataArr) => {
+if (dataArr.length === 1) {
+  const val = Number(dataArr[0]);
+  return { min: val - 0.05, max: val + 0.05 };
+}
+return {}; // 기본 자동 스케일링
+};
 
-    const labels = Object.keys(grouped).sort();
-    const average = [], max = [], min = [], count = [];
+const getPriceStats = () => {
+  const prices = transactionHistory.map(item => Number(item.price?.replace(/,/g, '')) / 100000000);
+  if (prices.length === 0) return null;
 
-    labels.forEach(month => {
-      const prices = grouped[month];
-      average.push(Number((prices.reduce((a, b) => a + b, 0) / prices.length).toFixed(4)));
-      max.push(Number(Math.max(...prices).toFixed(4)));
-      min.push(Number(Math.min(...prices).toFixed(4)));
-      count.push(prices.length);
-    });
-
-    return {
-      labels,
-      datasets: [
-        {
-          label: '평균 전세가',
-          data: average,
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          tension: 0,
-          yAxisID: 'y1',
-        },
-        {
-          label: '최고 전세가',
-          data: max,
-          borderColor: 'rgba(255, 99, 132, 1)',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          tension: 0,
-          yAxisID: 'y1',
-        },
-        {
-          label: '최저 전세가',
-          data: min,
-          borderColor: 'rgba(255, 206, 86, 1)',
-          backgroundColor: 'rgba(255, 206, 86, 0.2)',
-          tension: 0,
-          yAxisID: 'y1',
-        },
-        {
-          label: '거래량',
-          data: count,
-          type: 'bar',
-          backgroundColor: 'rgba(153, 102, 255, 0.5)',
-          borderColor: 'rgba(153, 102, 255, 1)',
-          borderWidth: 1,
-          yAxisID: 'y2',
-          barPercentage: 0.5,
-          categoryPercentage: 0.6,
-          datalabels: {
-            anchor: 'end',
-            align: 'start',
-            color: 'black',
-            font: { weight: 'bold' },
-            formatter: (value) => `${value}건`,
-          }
-        },
-      ],
-    };
+  const sum = prices.reduce((a, b) => a + b, 0);
+  return {
+    average: (sum / prices.length).toFixed(3),
+    max: Math.max(...prices).toFixed(3),
+    min: Math.min(...prices).toFixed(3),
+    count: prices.length
   };
+};
+
+const getLineChartData = () => {
+  const grouped = {};
+  transactionHistory.forEach(item => {
+    const month = `${item.contractYearMonth.slice(0, 4)}.${item.contractYearMonth.slice(4)}`;
+    const rawPrice = item.price?.replace(/,/g, '');
+    const price = Number(rawPrice) / 100000000;
+    if (!grouped[month]) grouped[month] = [];
+    if (!isNaN(price)) grouped[month].push(price);
+  });
+
+  const labels = Object.keys(grouped).sort();
+  const average = labels.map(month => {
+    const prices = grouped[month];
+    return (prices.reduce((a, b) => a + b, 0) / prices.length).toFixed(3);
+  });
+
+
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: '평균 전세가 (억 원)',
+        data: average,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0,
+        fill: false,
+        pointRadius: 5,
+      }
+    ]
+  };
+};
 
   return (
     <div className="mypage-subpage">
@@ -183,110 +168,6 @@ const MyUploads = () => {
         <p>실거래가 불러오는 중...</p>
       ) : transactionHistory.length > 0 ? (
         <>
-          <div className="chart-wrapper">
-            <h3>월별 평균 전세가 추이</h3>
-            <Line
-              data={getPriceSummaryData()}
-              options={{
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                  mode: 'point',
-                  intersect: true,
-                },
-                  elements: {
-                  point: {
-                    radius: 4,
-                    hitRadius: 10,
-                    hoverRadius: 6,
-                  },
-                  line: {
-                    tension: 0, // 꺾은선으로 만들기
-                  },
-                },
-
-                plugins: {
-                  legend: { position: 'top' },
-                  title: { 
-                    display: false, 
-                    text: ' ',
-                    font: {
-                      size: 16,
-                      weight: 'bold',
-                      family: 'Noto Sans KR', 
-                    },
-                    color: '#111',
-                    padding: {
-                      top: 10,
-                      bottom: 20,
-                   },
-                  },
-                  tooltip: {
-                    position: 'customAbove', // 아래에 정의한 커스텀 함수 이름
-                    callbacks: {
-                      label: (context) => {
-                        const label = context.dataset.label || '';
-                        const value = context.raw;
-                        return label === '거래량'
-                          ? `${label}: ${value}건`
-                          : `${label}: ${Number(value).toFixed(3)}억 원`;
-                      }
-                    }
-                  },
-                  datalabels: {
-                    display: (ctx) => ctx.dataset.label === '거래량',
-                    anchor: 'end',
-                    align: 'start',
-                    color: 'black',
-                    font: { weight: 'bold' },
-                    formatter: (value) => `${value}건`,
-                  }
-                },
-                scales: {
-                  x: {
-                    ticks: { maxRotation: 0, minRotation: 0 },
-                  },
-                  y1: {
-                    type: 'linear',
-                    position: 'left',
-                    title: {
-                      display: true,
-                      text: '전세가 (억 원)',
-                      color: '#666',
-                      font: {
-                        size: 12,
-                        weight: 'bold',
-                      },
-                    },
-                    ticks: {
-                      stepSize: 0.005,
-                      color: '#444',
-                      font: {
-                        size: 12,
-                      },
-                      callback: (value) => value.toFixed(3) + '억',
-                    },
-                  },
-
-                  y2: {
-                    type: 'linear',
-                    position: 'right',
-                    min: 0,
-                    max: 10,
-                    title: {
-                      display: false,
-                      text: '거래량 (건수)',
-                    },
-                    ticks: {
-                      display: false,
-                    },
-                    grid: { drawOnChartArea: false },
-                  },
-                },
-              }}
-              plugins={[ChartDataLabels]}
-            />
-          </div>
           <ul className="transaction-list">
             {transactionHistory.map((item, idx) => (
               <li key={idx} className="upload-card">
@@ -294,15 +175,93 @@ const MyUploads = () => {
                 <p><strong>가격:</strong> {formatPrice(item.price)}</p>
                 <p><strong>유형:</strong> {item.housingType} / {item.rentType}</p>
                 <p>
-                  <strong>면적:</strong> {item.area}㎡ ({convertToPyeong(item.area)}평)
+                   <strong>면적:</strong> {item.area}㎡ ({convertToPyeong(item.area)}평)
                 </p>
               </li>
             ))}
           </ul>
-        </>
-      ) : (
-        <p>결과가 없습니다. 주소/번 정보를 다시 확인해주세요.</p>
-      )}
+
+              {getPriceStats() && (
+                <div className="summary-box">
+                  <p><strong>거래 건수:</strong> {getPriceStats().count}건</p>
+                  <p><strong>평균 전세가:</strong> {getPriceStats().average}억</p>
+                  <p><strong>최고 전세가:</strong> {getPriceStats().max}억</p>
+                  <p><strong>최저 전세가:</strong> {getPriceStats().min}억</p>
+                </div>
+              )}
+
+              {getLineChartData().labels.length === 1 && (
+              <p style={{ textAlign: 'center', fontSize: '14px', color: '#666', marginTop: '12px' }}>
+                ※ 단일 거래 데이터입니다. 추이를 보기 위해 y축이 조정되었습니다.
+              </p>
+            )}
+
+
+            <div className="chart-wrapper">
+              <h3>월별 평균 전세가 추이</h3>
+              <Line
+                data={getLineChartData()}
+                options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      datalabels: {
+                        display: true,
+                        anchor: 'end',     
+                        align: 'top',      
+                        color: '#333',
+                        font: {
+                          weight: 'bold'
+                        },
+                        formatter: (value) => `${(value * 100000000).toLocaleString()}원`
+                      },
+                      tooltip: {
+                        position: 'customAbove',
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 10,
+                        bodySpacing: 6,
+                        displayColors: false,
+                        callbacks: {
+                            label: (ctx) => `${ctx.dataset.label}: ${(ctx.raw * 100000000).toLocaleString()}원`
+                        }
+                      },
+                      legend: { position: 'top' }
+                    },
+                    elements: {
+                      point: {
+                        radius: 6,
+                        borderWidth: 2,
+                        backgroundColor: '#1890ff',
+                        borderColor: '#005cbf',
+                        hoverRadius: 8,
+                      }
+                    },
+                    scales: {
+                      x: {
+                        offset: true,
+                        ticks: {
+                          align: 'center'
+                        }
+                      },
+                    y: {
+                      ...getYAxisRange(getLineChartData().datasets[0].data),
+                      title: {
+                        display: true,
+                        text: '전세가 (억 원)'
+                      },
+                      ticks: {
+                        callback: (value) => value.toFixed(2) + '억'
+                      }
+                    }
+                  }
+                }}
+              />
+
+            </div>
+          </>
+        ) : (
+          <p></p>
+        )}
     </div>
   );
 };
