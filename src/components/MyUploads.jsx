@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Line } from 'react-chartjs-2';
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 
 // Chart.js 플러그인 등록
 ChartJS.register(
@@ -95,7 +95,10 @@ const MyUploads = () => {
 
     setLoading(false);
   };
-useEffect(() => {
+
+
+/*
+  useEffect(() => {
   // 테스트용 하드코딩 데이터
   const sampleJeonse = [
     {
@@ -135,6 +138,9 @@ useEffect(() => {
   setSaleData(sampleSale);
   setTransactionHistory(sampleJeonse); // 전세만 거래 리스트에
 }, []);
+*/
+
+
 
   // 숫자에 쉼표 추가 (금액 포맷용)
   const formatPrice = (value) => {
@@ -325,14 +331,25 @@ useEffect(() => {
                       ? 'sale-missing'
                       : '';
 
+                const isRisk = item.rate && Number(item.rate) >= 70;
+
                   return (
                     <li key={idx} className={missingClass}>
                       <strong>{item.month}</strong> –{' '}
-                      {item.rate ? (
-                        <>전세가율: <span className="rate-ok">{item.rate}%</span></>
-                      ) : (
-                        <>전세가율: <span className="rate-fail">계산 불가</span></>
-                      )}
+                        {item.rate ? (
+                          <>
+                            전세가율:{' '}
+                            <span className={isRisk ? 'rate-warn' : 'rate-ok'}>
+                              {item.rate}%
+                            </span>
+                            {isRisk && (
+                              <span className="risk-info-icon" title="위험 지표">i</span>
+                            )}
+                          </>
+                        ) : (
+                          <>전세가율: <span className="rate-fail">계산 불가</span></>
+                        )}
+
                       <br />
                       전세: {item.avgJeonse ? `${item.avgJeonse}억` : '없음'} /
                       매매: {item.avgSale ? `${item.avgSale}억` : '없음'}

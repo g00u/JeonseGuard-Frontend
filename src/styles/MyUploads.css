@@ -243,5 +243,47 @@ span.rate-ok {
   font-style: italic;
 }
 
+.rate-ok {
+  color: green;
+  font-weight: bold;
+}
+
+.rate-warn {
+  color: red;
+  font-weight: bold;
+  position: relative;
+  
+}
 
 
+.risk-info-icon {
+  display: inline-block;
+  margin-left: 6px;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  border-radius: 50%;
+  background-color: #c00;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+
+.risk-info-icon:hover::after {
+  content: '전세가율이 70% 이상이면 전세보증금 회수가 어려워질 수 있어 위험합니다.';
+  position: absolute;
+  top: 1.5em;
+  left: 50;
+  transform: translateX(-66%);
+  background-color: #ffeaea;
+  color: #c00;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
