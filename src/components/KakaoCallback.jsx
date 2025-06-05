@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from '../context/UserContext';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const KakaoCallback = () => {
   const [searchParams] = useSearchParams();
@@ -52,7 +53,7 @@ const KakaoCallback = () => {
     }
   }, [code, API_URL, navigate, setUser]);
 
-  return <div>카카오 로그인 처리 중...</div>;
+  return <LoadingSpinner text="카카오 로그인 처리 중입니다..." />;
 };
 
 export default KakaoCallback;
