@@ -38,6 +38,21 @@ class BoardService {
     deleteBoard(postId) {
         return axios.delete(`${API_URL}/post/${postId}`);
     }
+
+    // 6. 게시글 좋아요
+    likeBoard(postId) {
+    const token = localStorage.getItem('accessToken');
+    return axios.post(
+      `${API_URL}/heart`,
+      { postId }, // 서버가 postId를 body로 받는 경우
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    }
+
 }
 const boardService = new BoardService();
 export default boardService;
