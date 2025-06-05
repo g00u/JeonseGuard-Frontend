@@ -26,15 +26,15 @@ function AIReportPage() {
       //  새로고침 시 백엔드에서 재요청
       const fetchData = async () => {
         try {
-          const res1 = await fetch('http://127.0.0.1:8000/get_part_1_json', {
+          const res1 = await fetch('http://34.22.71.169:8000/get_part_1_json', {
             method: 'POST',
             body: new URLSearchParams({ name })
           });
-          const res2 = await fetch('http://127.0.0.1:8000/get_part_2_json', {
+          const res2 = await fetch('http://34.22.71.169:8000/get_part_2_json', {
             method: 'POST',
             body: new URLSearchParams({ name })
           });
-          const res3 = await fetch('http://127.0.0.1:8000/get_part_3_json', {
+          const res3 = await fetch('http://34.22.71.169:8000/get_part_3_json', {
             method: 'POST',
             body: new URLSearchParams({ name })
           });
