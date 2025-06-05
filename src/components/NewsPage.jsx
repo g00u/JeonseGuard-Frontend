@@ -34,10 +34,16 @@ useEffect(() => {
 
   return (
     <div className="news-page-container">
-      <h2 className="news-page-title">전체 뉴스</h2>
+    <div className="news-title-banner">
+      <h2 className="news-page-title"> 전체 전세 관련 뉴스</h2>
+      <p className="news-subtitle">최신 전세 사기 예방과 관련된 정보를 모아 보여드립니다.</p>
+    </div>
 
       {isLoading ? (
-        <p className="news-loading">뉴스 로딩 중...</p>
+        <div className="loading-spinner-wrapper">
+          <div className="spinner"></div>
+          <p>뉴스 로딩 중입니다...</p>
+        </div>
       ) : hasError ? (
         <p className="news-error">뉴스를 불러오지 못했습니다.</p>
       ) : (

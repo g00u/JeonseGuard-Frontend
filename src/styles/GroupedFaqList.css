@@ -1,30 +1,38 @@
 .faq-list {
-  margin: 24px auto;
+  margin: 32px auto;
   max-width: 880px;
-  padding: 24px;
-  background: #f9f9f9;
+  padding: 24px 28px;
+  background: #f7f9fc; /* 배경 조금 더 밝게 */
+  border: 1px solid #d1d5db;  /* 연한 테두리 추가 */
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* 그룹 타이틀 */
 .faq-group-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: #333;
-  background-color: #e9f1ff;
-  padding: 14px 18px;
+  color: #2c3e50; /* 딥그레이 블루 */
+  background-color: #eef4fb;  /* 아주 연한 블루 계열 */
+  padding: 14px 20px;
   margin-top: 24px;
-  border-left: 6px solid #4a90e2;
-  border-radius: 6px;
+  border-left: 5px solid #8cb4ea; /* 연한 하늘색 */
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.faq-group-title:hover {
+  background-color: #d4e6ff;
 }
 
 .faq-group-arrow {
   transition: transform 0.3s ease;
   font-size: 20px;
+  color: #5b7dbd;  /* 중간 정도의 블루 그레이 */
 }
 
 .faq-group-arrow.open {
@@ -35,25 +43,34 @@
   margin-top: 12px;
 }
 
+/* FAQ 카드 */
 .faq-card {
   background: white;
-  border-left: 4px solid #4a90e2;
-  padding: 14px 20px;
+  border: 1px solid #dbeafe;
+    border-left: 4px solid #a2c4ec; /* 연한 포인트 블루 */
+  background: #f9fbfd; /* 아주 연한 회청색 */
+  border: 1px solid #e3e8f0;  /* 은은한 테두리 */
+  padding: 16px 22px;
   margin: 16px 0;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: border-left 0.2s ease;
+}
+
+.faq-card:hover {
+  border-left: 5px solid #2563eb;
 }
 
 .faq-card h4 {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 8px;
   font-size: 1rem;
-  color: #222;
+  color: #111827;
 }
 
 .faq-card p {
   margin: 0;
-  color: #555;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  color: #4b5563;
+  font-size: 0.94rem;
+  line-height: 1.5;
 }
