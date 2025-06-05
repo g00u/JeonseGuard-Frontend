@@ -157,32 +157,32 @@ return (
 
 
     {/*  검색 결과 게시글 리스트 */}
-    <div className="post-list">
+    {/* <div className="post-list">
       {filteredPosts.map((post) => (
         <div key={post.postId} className="post-card" onClick={() => handleClick(post.postId)}>
           <h3>{post.title}</h3>
           <p className="post-preview">
             {post.content?.substring(0, 60) || "내용 없음"}...
-          </p>
+          </p> */}
    
           {/* 태그 리스트 */}
-          <div className="post-tags">
+          {/* <div className="post-tags">
             {post.tags?.map((tag) => (
               <span key={tag} className="post-tag">{tag}</span>
             ))}
-          </div>
+          </div> */}
 
-          <div className="post-meta">
+          {/* <div className="post-meta">
             <span>{post.author}</span>
             <span>{post.date}</span>
           </div>
         </div>
-      ))}
+      ))} */}
      
-      {filteredPosts.length === 0 && (
+      {/* {filteredPosts.length === 0 && (
         <div className="empty-list-message">검색 결과가 없습니다.</div>
       )}
-    </div> 
+    </div>  */}
 
 
 

@@ -13,8 +13,7 @@ import BoardPage from './pages/BoardPage';
 // import BoardPage from './components/BoardListComponent';
 import BoardDetailPage from './pages/BoardDetailPage';
 import BoardCreatePage from './pages/BoardCreatePage';
-import PreventionBoard from './pages/BoardPreventionPage';
-import ReportBoard from './pages/BoardReportPage';
+import BoardEditPage from './pages/BoardEditPage';
 
 import ReportPage from './components/ReportPage';
 import SearchResultPage from './components/SearchResultPage';
@@ -67,8 +66,8 @@ function App() {
             <Route path="/board" element={<BoardPage />} />
             <Route path="/board/:postId" element={<BoardDetailPage />} /> {/** board detail page 에서 설정한 것과 똑같이 */}
             <Route path="/board/write" element={<BoardCreatePage />} />
-            <Route path="/prevention" element={<PreventionBoard />} />
-            <Route path="/report" element={<ReportBoard />} />
+            <Route path="/board/:postId/edit" element={<BoardEditPage/>} />
+     
 
             <Route path="/analysis" element={<ReportPage />} />
             <Route path="/mypage" element={<MyPage />} />
