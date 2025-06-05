@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from './SearchBar';
 import NewsCarousel from './NewsCarousel';
-import FaqList from './FaqList';
+
 import '../styles/MainPage.css';
 import { IoLogoWechat } from "react-icons/io5";
 import { MdDriveFolderUpload } from "react-icons/md";
@@ -14,25 +14,7 @@ function MainPage() {
   const [newsItems, setNewsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [faqItems] = useState([
-    {
-      question: "확정일자랑 전입신고는 어떻게 다른가요?",
-      answer: "확정일자는 법원에서 받는 날짜 도장, 전입신고는 주민센터에서 주소 등록입니다. 둘 다 해야 임차인 보호됩니다."
-    },
-    {
-      question: "특약사항에 주의할 점은 무엇인가요?",
-      answer: "전입신고 금지, 계약 해지 시 위약금 과다 등은 위험합니다. 이미지 업로드시 AI가 자동 분석해드려요."
-    },
-    {
-      question: "계약 후 바로 전입신고해도 괜찮나요?",
-      answer: "잔금일과 입주일 이후 전입신고와 확정일자를 동시에 받아야 보증금 우선변제권이 생깁니다."
-    },
-    {
-      question: "임대인이 여러 명일 때 계약은 어떻게 하나요?",
-      answer: "공동소유일 경우 모든 소유자의 동의 및 서명이 필요합니다. 한 명과만 계약하면 무효가 될 수 있어요."
-    },
-
-  ]);
+ 
 
   const navigate = useNavigate();
 
@@ -91,7 +73,7 @@ useEffect(() => {
           <Link to="/board" className="menu-btn"><FaClipboardList className="icon" />게시판</Link>
         </div>
         <div className="menu-btns">
-          <Link to="/MyPage" className="menu-btn"><IoLogoWechat className="icon" />챗봇 상담</Link>
+          <Link to="/faq" className="menu-btn"><IoLogoWechat className="icon" />자주 묻는 질문</Link>
         </div>
       </div>
 
@@ -117,7 +99,7 @@ useEffect(() => {
           <div className="info-box empty-box">현재 표시할 뉴스가 없습니다.</div>
         )}
 
-        <FaqList faqItems={faqItems} collapsible />
+        
       </div>
     </div>
   );
