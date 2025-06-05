@@ -36,8 +36,14 @@ class BoardService {
 
     // 5. 게시글 삭제
     deleteBoard(postId) {
-        return axios.delete(`${API_URL}/post/${postId}`);
+        const token = localStorage.getItem('accessToken'); // 토큰 가져오기
+        return axios.delete(`${API_URL}/post/${postId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
     }
+
 
     // 6. 게시글 좋아요
     likeBoard(postId) {
