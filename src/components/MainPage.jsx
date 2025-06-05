@@ -62,23 +62,31 @@ useEffect(() => {
       </div>
 
       {/* 메뉴 버튼 */}
-      <div className="menu-btn-container">
-        <div className="menu-btns">
-          <Link to="/uploadfile" className="menu-btn"><MdDriveFolderUpload className="icon" />문서 업로드</Link>
-        </div>
-        <div className="menu-btns">
-          <Link to="/mypage/uploads" className="menu-btn"><IoMdAnalytics className="icon" />실거래가 조회</Link>
-        </div>
-        <div className="menu-btns">
-          <Link to="/board" className="menu-btn"><FaClipboardList className="icon" />게시판</Link>
-        </div>
-        <div className="menu-btns">
-          <Link to="/faq" className="menu-btn"><IoLogoWechat className="icon" />자주 묻는 질문</Link>
-        </div>
-      </div>
+<div className="home-card-grid emphasized">
+  <Link to="/uploadfile" className="card-btn-strong">
+    <div className="icon-circle blue"><MdDriveFolderUpload /></div>
+    <span>문서 업로드</span>
+  </Link>
+  <Link to="/mypage/uploads" className="card-btn-strong">
+    <div className="icon-circle green"><IoMdAnalytics /></div>
+    <span>실거래가 조회</span>
+  </Link>
+  <Link to="/board" className="card-btn-strong">
+    <div className="icon-circle orange"><FaClipboardList /></div>
+    <span>게시판</span>
+  </Link>
+  <Link to="/faq" className="card-btn-strong">
+    <div className="icon-circle purple"><IoLogoWechat /></div>
+    <span>FAQ</span>
+  </Link>
+</div>
+
+
 
       {/* 뉴스 캐러셀 or 로딩/에러 처리 */}
-      <div className="info-section">
+      <div className="news-wrapper">
+        <h3 className="section-title">📢 최신 전세 관련 뉴스</h3>
+
         {isLoading ? (
           <div className="info-box loading-box">뉴스 로딩 중입니다...</div>
         ) : hasError ? (
@@ -88,19 +96,18 @@ useEffect(() => {
           </div>
         ) : newsItems.length > 0 ? (
           <>
-            <NewsCarousel items={newsItems} />
+            <NewsCarousel items={newsItems} />  {/* 타이틀 없이 */}
             <div className="see-more-button-wrapper">
               <button className="see-more-button" onClick={() => navigate('/news')}>
-                 + 전체 뉴스 더보기
+                + 전체 뉴스 더보기
               </button>
             </div>
           </>
         ) : (
           <div className="info-box empty-box">현재 표시할 뉴스가 없습니다.</div>
         )}
-
-        
       </div>
+
     </div>
   );
 }

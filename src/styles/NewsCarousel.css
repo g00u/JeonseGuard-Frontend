@@ -1,23 +1,11 @@
-/* 전체 슬라이더 영역 */
+/* 전체 뉴스 캐러셀 박스 */
 .news-carousel {
-  position: relative; /* 화살표 포지셔닝 기준 */
-  background-color: #f3f4f6;
-  border-radius: 12px;
-  padding: 20px 20px 32px;
-  margin-top: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+  background: transparent; 
+  box-shadow: none;
+  border: none;
+  padding: 0;
 }
 
-/* 섹션 제목 */
-.carousel-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 16px;
-}
 
 /* 슬라이드 내부 */
 .news-slide {
@@ -32,10 +20,14 @@
 }
 
 .news-item {
-  padding: 12px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 4px;
+  border-bottom: 1px solid #eee;
   font-size: 0.95rem;
+  background: none;         
+  box-shadow: none;           
+  border-radius: 0;          
 }
+
 
 .news-link {
   display: flex;
@@ -48,11 +40,11 @@
 
 .news-title {
   flex: 1;
-  color: #111827;
+  color: #222;
   font-weight: 500;
   padding-right: 10px;
   transition: color 0.2s;
-  line-height: 1.2;
+  line-height: 1.4;
   white-space: normal;
   overflow: hidden;
   display: -webkit-box;
@@ -72,11 +64,11 @@
   white-space: nowrap;
 }
 
+
 /* 슬라이더 dots */
 .news-carousel .slick-dots {
   position: relative;
   margin-top: -12px;
-  margin-bottom: 0px;
   padding-bottom: 0;
   text-align: center;
 }
@@ -86,13 +78,14 @@
 }
 
 .slick-dots li button:before {
-  color: #9ca3af;
+  color: #cbd5e1;
   font-size: 8px;
 }
 
 .slick-dots li.slick-active button:before {
   color: #2563eb;
 }
+
 
 /* 커스텀 화살표 */
 .custom-arrow {
@@ -101,13 +94,12 @@
   transform: translateY(-50%);
   z-index: 10;
 
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.175); /* 반투명 흰색 */
-  
+  background-color: rgba(255, 255, 255, 0.6);
 
-  color: #6b7280; /* 기본 중간 회색 */
+  color: #6b7280;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,17 +109,16 @@
   transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
-
 .custom-arrow:hover {
-  background-color: #e5e7eb; /* hover 시 밝은 회색 */
-  color: #111827; /* hover 시 더 진한 텍스트 */
-  transform: translateY(-50%) scale(1.05);
+  background-color: #e0e6ed;
+  color: #111827;
+  transform: translateY(-50%) scale(1.1);
 }
 
 .custom-prev {
-  left: -24px;
+  left: -28px;
 }
 
 .custom-next {
-  right: -24px;
+  right: -28px;
 }

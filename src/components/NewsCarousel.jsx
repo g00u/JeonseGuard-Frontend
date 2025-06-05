@@ -53,7 +53,7 @@ function NewsCarousel({ items }) {
 
   return (
     <div className="news-carousel">
-      <h2 className="carousel-title">전세 관련 뉴스</h2>
+      
       <Slider {...settings}>
         {chunkedItems.map((group, index) => (
           <div className="news-slide" key={index}>
