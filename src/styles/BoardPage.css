@@ -18,6 +18,34 @@
   margin-bottom: 10px;
 }
 
+.board-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 2rem;
+}
+
+.board-table th,
+.board-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.board-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.board-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
 .board-description {
   font-size: 16px;
   color: #666;
@@ -105,6 +133,7 @@
   transition: box-shadow 0.2s ease;
   /* margin 제거 - flex 내부니까 필요 없음 */
   display: block; /* 유지 가능 */
+  margin-bottom: 5%;
 }
 
 
