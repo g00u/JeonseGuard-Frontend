@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import boardService from '../services/BoardService';
+import Comment from '../components/Comment';
 import '../styles/BoardDetailPage.css';
 import { useUser } from '../context/UserContext';
 import heartImg from '../assets/heart.png';
+
 
 const BoardDetailPage = () => {
   const { postId } = useParams();
@@ -75,10 +77,11 @@ const BoardDetailPage = () => {
   if (!post) return <div>로딩 중...</div>;
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-      <p className="text-sm text-gray-500 mb-4">작성자: {post.creator}</p>
-      <p className="mb-6">{post.content}</p>
+    <div className="detail-container p-4 max-w-3xl mx-auto">
+      <h2 className="detail-title text-2xl font-bold mb-2">{post.title}</h2>
+      <p className="detail-meta text-sm text-gray-500 mb-4">작성자: {post.creator}</p>
+      <p className="detail-meta text-sm text-gray-500 mb-4">작성일: {new Date(post.createdDateTime).toLocaleString()}</p>
+      <p className="detail-content mb-6">{post.content}</p>
 
       {/* 수정 버튼: 작성자만 표시 */}
       {user?.nickname === post.creator && (
@@ -89,6 +92,9 @@ const BoardDetailPage = () => {
           수정
         </button>
       )}
+
+      &nbsp;
+
       {/* 삭제 버튼: 작성자만 표시 */}
       {user?.nickname === post.creator && (
         <button
@@ -98,6 +104,13 @@ const BoardDetailPage = () => {
           삭제
         </button>
       )}
+
+      <br/>
+
+      {/* 뒤로가기 버튼 */}
+      <button className="back-button" onClick={() => navigate(-1)}>
+        <span className="back-icon">←</span> 뒤로가기
+      </button>
 
       {/* 좋아요 버튼: 작성자 제외, 중복 방지 */}
       {user?.nickname !== post.creator && (
@@ -111,6 +124,12 @@ const BoardDetailPage = () => {
           <span className="ml-1">{count}</span>
         </button>
       )}
+
+      <hr/>
+
+      { /* 댓글  */}
+      <Comment postId={postId} /> {/* 댓글 컴포넌트 렌더링링 */} 
+
     </div>
   );
 };

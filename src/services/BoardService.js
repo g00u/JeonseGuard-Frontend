@@ -59,6 +59,28 @@ class BoardService {
     );
     }
 
+
+    // 댓글 조회
+    getComments(postId) {
+        const token = localStorage.getItem('accessToken'); 
+        return axios.get(`${API_URL}/post/${postId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    // 댓글 작성
+    addComment(commentData) {
+        const token = localStorage.getItem('accessToken');
+
+        return axios.post(`${API_URL}/comment`, commentData, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        });
+    }
+
 }
 const boardService = new BoardService();
 export default boardService;

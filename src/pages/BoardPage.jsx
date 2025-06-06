@@ -37,13 +37,11 @@ function BoardPage() {
   }, []);
 
   const renderBoardTable = (boards) => (
-    <table className="table table-striped table-bordered">
+    <table className="board-table table table-striped table-bordered">
       <thead>
         <tr>
           <th>글 번호</th>
           <th>타이틀</th>
-          <th>작성자</th>
-          <th>작성일</th>
           <th>댓글 수</th>
           <th>좋아요 수</th>
         </tr>
@@ -54,8 +52,6 @@ function BoardPage() {
           <tr key={board.postId} onClick={() => handleClick(board.postId)} style={{ cursor: 'pointer' }}>
             <td>{board.postId}</td>
             <td>{board.title}</td>
-            <td>{board.creator}</td>
-            <td>{new Date(board.createdDateTime).toLocaleString()}</td>
             <td>{board.commentCount}</td>
             <td>{board.heartCount}</td>
           </tr>
@@ -92,15 +88,15 @@ function BoardPage() {
 
 
   //필터링: 검색어 & 태그 모두 반영
-  const filteredPosts = posts.filter((post) => {
-    const matchKeyword =
-      post.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-      post.content.toLowerCase().includes(searchKeyword.toLowerCase());
+  // const filteredPosts = posts.filter((post) => {
+  //   const matchKeyword =
+  //     post.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+  //     post.content.toLowerCase().includes(searchKeyword.toLowerCase());
 
-    const matchTag = selectedTag === '' || post.tags?.includes(selectedTag);
+  //   const matchTag = selectedTag === '' || post.tags?.includes(selectedTag);
 
-    return matchKeyword && matchTag;
-  });
+  //   return matchKeyword && matchTag;
+  // });
 
   //태그 전체 목록 추출
   const allTags = [...new Set(posts.flatMap((p) => p.tags || []))];
@@ -187,13 +183,13 @@ return (
 
 
     <div> {/* 게시글 일부 출력 */}
-      <h2 className="text-center">Prevention Boards List</h2>
+      <h2 className="text-center">🛡️예방 게시판 </h2>
       <div className="row">
         {renderBoardTable(preventionBoards)}
       </div>
 
       <hr />
-      <h2 className="text-center">Report Boards List</h2>
+      <h2 className="text-center">📞신고 게시판 </h2>
       <div className="row">
         {renderBoardTable(reportBoards)}
       </div>
