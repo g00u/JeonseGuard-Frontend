@@ -4,14 +4,14 @@ import axios from 'axios';
 import { useUser } from '../context/UserContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 
+const API_URL = process.env.REACT_APP_API_URL; 
+//빌드 시점에만 정의되기 때문에 불필요한 리렌더링 또는 경고 방지 위해 이곳에 작성
+
 const KakaoCallback = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate(); 
   const { setUser } = useUser(); 
   const code = searchParams.get('code');
-  const API_URL = process.env.REACT_APP_API_URL;
-  console.log("Redirect URI:", process.env.REACT_APP_KAKAO_REDIRECT_URI);
-  console.log(' KakaoCallback 컴포넌트 로드됨');
   console.log(' 전달받은 code:', code)
 
   useEffect(() => {
@@ -43,6 +43,7 @@ const KakaoCallback = () => {
           })
           .catch(err => {
             console.error('유저 정보 가져오기 실패:', err);
+            alert('유저 정보를 가져오는 데 실패했습니다. 다시 로그인해주세요.');
             navigate('/login');
           });
         })

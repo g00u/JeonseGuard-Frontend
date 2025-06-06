@@ -32,6 +32,11 @@ const BoardDetailPage = () => {
 
   // 게시글 상세 불러오기
   useEffect(() => {
+    if (!user) {
+      alert('로그인이 필요합니다.');
+      navigate('/login'); // 로그인 페이지로 리다이렉트
+      return;
+    }
     boardService.getBoardDetail(postId)
       .then(response => {
         setPost(response.data);
@@ -74,7 +79,7 @@ const BoardDetailPage = () => {
     });
   };
 
-  if (!post) return <div>로딩 중...</div>;
+  if (!post) return;
 
   return (
     <div className="detail-container p-4 max-w-3xl mx-auto">
