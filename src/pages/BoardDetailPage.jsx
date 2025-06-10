@@ -45,7 +45,7 @@ const BoardDetailPage = () => {
       .catch(error => {
         console.error('API 호출 실패:', error);
       });
-  }, [postId]);
+  }, [user, navigate, postId]);
 
   // 좋아요 여부 확인 (localStorage)
   useEffect(() => {
