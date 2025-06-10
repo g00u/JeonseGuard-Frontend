@@ -15,7 +15,7 @@ const KakaoCallback = () => {
   console.log(' 전달받은 code:', code)
 
   useEffect(() => {
-    console.log(' useEffect 실행됨');
+    // console.log(' useEffect 실행됨');
     if (code) {
       console.log('카카오에서 받은 code:', code);
       axios.post(`${API_URL}/auth/login`, { code })

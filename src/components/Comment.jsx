@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import commentService from '../services/BoardService';
 import { useUser } from '../context/UserContext';
 import '../styles/BoardPage.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const Comment = ({ postId }) => {
   const { user } = useUser();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 //   const token = localStorage.getItem('accessToken');
 
 
