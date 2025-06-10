@@ -54,3 +54,34 @@ button:hover {
   color: #52c41a;
   font-weight: bold;
 }
+
+.mypage-subpage {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.6;
+}
+
+.info-box, .notice-box, .feedback-box {
+  background-color: #f9f9f9;
+  border-left: 6px solid #007BFF;
+  padding: 16px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.feedback-btn {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+.feedback-btn:hover {
+  background-color: #0056b3;
+}
