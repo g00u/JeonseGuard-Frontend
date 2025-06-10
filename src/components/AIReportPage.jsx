@@ -27,24 +27,43 @@ function AIReportPage() {
   const { name } = useParams();
   const [data, setData] = useState(null);
 
-  const downloadAsPDF = () => {
+const downloadOnePagePDF = async () => {
   const target = document.querySelector('.report-container');
-  html2canvas(target).then(canvas => {
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const width = pdf.internal.pageSize.getWidth();
-    const height = (canvas.height * width) / canvas.width;
 
-    pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-    pdf.save('AI_분석_결과.pdf');
+  const canvas = await html2canvas(target, {
+    scale: 2,
+    useCORS: true
   });
+
+  const imgData = canvas.toDataURL('image/png');
+  const pdf = new jsPDF('p', 'mm', 'a4');
+
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  // 한 장에 통으로 저장하려면 이미지 전체가 한 페이지 안에 들어가야 하므로 축소 필요
+  const ratio = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+
+  const finalWidth = canvas.width * ratio;
+  const finalHeight = canvas.height * ratio;
+
+  // 중앙 정렬 (선택사항)
+  const x = (pageWidth - finalWidth) / 2;
+  const y = (pageHeight - finalHeight) / 2;
+
+  pdf.addImage(imgData, 'PNG', x, y, finalWidth, finalHeight);
+  pdf.save('AI_분석_결과_전체.pdf');
 };
+
 
 const downloadAsImage = () => {
   const target = document.querySelector('.report-container');
   html2canvas(target).then(canvas => {
     const link = document.createElement('a');
-    link.download = 'AI_분석_결과.png';
+    link.download = '전세가드드AI_분석_결과.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
@@ -393,7 +412,7 @@ const downloadAsImage = () => {
         )}
       </div>
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
-        <button className="save-btn" onClick={downloadAsPDF}> 결과 PDF 저장</button>
+        <button className="save-btn" onClick={downloadOnePagePDF}> 결과 PDF 저장</button>
         <button className="save-btn" onClick={downloadAsImage}> 이미지로 저장</button>
       </div>
 
