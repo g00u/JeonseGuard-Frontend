@@ -5,7 +5,7 @@ export const sendDataToBackend = async (imageFile) => {
   formData.append('file', imageFile);
 
   // 1. 이미지 업로드
-  const uploadRes = await axios.post(`${BASE_URL}/get_part_1_json/upload_image`, formData);
+  const uploadRes = await axios.post(`${BASE_URL}/upload_image`, formData);
   const filename = uploadRes.data.filename || imageFile.name.split('.')[0]; 
 
   // 2. name 기반으로 세 개 API 호출
