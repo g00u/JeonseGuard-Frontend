@@ -70,7 +70,7 @@ const MyPage = () => {
 
             <div className="section-card" onClick={() => navigate('/mypage/history')}>
               <FaHistory className="section-icon" />
-              분석 히스토리 보기
+              ℹ️ JeonseGuard 안내 및 문의하기
             </div>
           </div>
         </>

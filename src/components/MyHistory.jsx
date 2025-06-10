@@ -3,7 +3,7 @@ import '../styles/MyHistory.css';
 
 const MyHistory = () => {
   const handleFeedback = () => {
-    window.open('https://docs.google.com/forms/d/e/1FAIpQLSdbv8RaWmKQF0sijjpCp7j9UbfRp7uQ3_VcV7zFJov8J6Gqdw/viewform?usp=dialog', '_blank'); // 문의 폼 링크로 교체
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLSdbv8RaWmKQF0sijjpCp7j9UbfRp7uQ3_VcV7zFJov8J6Gqdw/viewform?usp=dialog', '_blank'); 
   };
 
   return (

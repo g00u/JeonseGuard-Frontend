@@ -1,87 +1,68 @@
-.mypage-subpage {
-  padding: 24px;
-  max-width: 800px;
-  margin: auto;
-}
-
-.history-card,
-.upload-card,
-.post-card {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: box-shadow 0.2s ease;
-}
-
-.history-card:hover,
-.upload-card:hover,
-.post-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-
-button {
-  padding: 8px 16px;
-  background-color: #1890ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: #40a9ff;
-}
-
-.button-danger {
-  background-color: #ff4d4f;
-}
-.button-safe {
-  background-color: #52c41a;
-}
-
-.rate-danger {
-  color: #ff4d4f;
-  font-weight: bold;
-}
-
-.rate-normal {
-  color: #52c41a;
-  font-weight: bold;
-}
-
+/* 전체 페이지 스타일 */
 .mypage-subpage {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
   font-family: 'Noto Sans KR', sans-serif;
-  line-height: 1.6;
+  line-height: 1.8;
+  color: #333;
 }
 
-.info-box, .notice-box, .feedback-box {
-  background-color: #f9f9f9;
+/* 안내 박스 공통 스타일 */
+.info-box,
+.notice-box,
+.feedback-box {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
   border-left: 6px solid #007BFF;
-  padding: 16px 20px;
-  margin: 20px 0;
   border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+/* 각 박스 구분용 색상  */
+.info-box {
+  border-left-color: #007BFF;
+}
+.notice-box {
+  border-left-color: #FF9800;
+}
+.feedback-box {
+  border-left-color: #28a745;
+}
+
+/* 피드백 버튼 */
 .feedback-btn {
+  display: inline-block;
   background-color: #007BFF;
   color: white;
   padding: 10px 18px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
   margin-top: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .feedback-btn:hover {
   background-color: #0056b3;
+}
+
+/* 리스트 안쪽 여백 */
+.info-box ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.info-box li {
+  margin-bottom: 6px;
+}
+
+/* h2 제목 스타일 */
+.mypage-subpage h2 {
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+  color: #222;
 }
