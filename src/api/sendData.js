@@ -1,13 +1,13 @@
 // src/api/sendData.js
 import axios from "axios";
-
+const BASE_URL = process.env.REACT_APP_AI_API_URL;
 export const sendDataToBackend = async (imageFile) => {
   const formData = new FormData();
   formData.append("file", imageFile);
 
   try {
     const response = await axios.post(
-      "http://34.22.71.169:8000/upload_image", 
+      `${BASE_URL}/upload_image`, 
       formData,
       {
         headers: {

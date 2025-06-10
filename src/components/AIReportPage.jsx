@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import '../styles/AIReportPage.css';
-
+const BASE_URL = process.env.REACT_APP_AI_API_URL;
 
 function AIReportPage() {
   const location = useLocation();
@@ -26,15 +26,15 @@ function AIReportPage() {
       //  새로고침 시 백엔드에서 재요청
       const fetchData = async () => {
         try {
-          const res1 = await fetch('http://34.22.71.169:8000/get_part_1_json', {
+          const res1 = await fetch(`${BASE_URL}/get_part_1_json`, {
             method: 'POST',
             body: new URLSearchParams({ name })
           });
-          const res2 = await fetch('http://34.22.71.169:8000/get_part_2_json', {
+          const res2 = await fetch(`${BASE_URL}/get_part_2_json`, {
             method: 'POST',
             body: new URLSearchParams({ name })
           });
-          const res3 = await fetch('http://34.22.71.169:8000/get_part_3_json', {
+          const res3 = await fetch(`${BASE_URL}/get_part_3_json`, {
             method: 'POST',
             body: new URLSearchParams({ name })
           });
