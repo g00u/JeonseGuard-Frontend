@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/WritePage.css'; 
+
 
 const BoardForm = ({ initialData = {}, onSubmit, showCategorySelect = false, author }) => {
     const [title, setTitle] = useState(initialData.title || '');
     const [content, setContent] = useState(initialData.content || '');
     const [category, setCategory] = useState(initialData.category || 'prevention');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,34 +19,48 @@ const BoardForm = ({ initialData = {}, onSubmit, showCategorySelect = false, aut
     };
 
     return (
-        <div className="p-4 max-w-xl mx-auto">
-            <h2 className="text-xl font-bold mb-4">[ {category} ] 글 작성</h2>
+        <div >
+            <h2 className="detail-meta detail-title text-2xl font-bold mb-2"> 🗣️ 글 작성</h2>
             {/* <p className="text-sm text-gray-600 mb-2">작성자: {author}</p> */}
             <form onSubmit={handleSubmit}>
-                {showCategorySelect && (
-                    <select value={category} onChange={e => setCategory(e.target.value)}>
-                        <option value="prevention">예방</option>
-                        <option value="report">신고</option>
-                    </select>
-                )}
+                <div style={{marginBottom: '10px'}}>
+                    {showCategorySelect && (
+                        <select className='dropdown' value={category} onChange={e => setCategory(
+                            e.target.value
+                            )}>
+                            <option value="prevention">예방</option>
+                            <option value="report">신고</option>
+                        </select>
+                    )}
+                </div>
                 <input
                     type="text"
                     placeholder="제목"
-                    className="w-full border p-2 rounded"
+                    className="detail-content w-full border p-2 rounded board-search-input mb-2"
+                    rows="1"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
-                <textarea
+                <textarea 
                     placeholder="내용"
-                    className="w-full border p-2 rounded h-40"
+                    className="detail-content w-full border p-2 rounded h-40 board-search-input mb-2"
+                    rows="5"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
+                    style={{ resize: 'none' }} 
                 />
+                <br/>
+
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    <span className="back-icon">←</span> 뒤로가기
+                </button>
                 <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
                     작성하기
                 </button>
+                
+                
             </form>
         </div>
     );

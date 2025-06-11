@@ -2,6 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BoardForm from '../components/BoardForm';
 import boardService from '../services/BoardService';
+// import '../styles/WritePage.css'; 
+import '../styles/BoardDetailPage.css'; // 스타일 적용
+
+
+
+
 
 const BoardCreatePage = () => {
     const navigate = useNavigate();
@@ -17,7 +23,11 @@ const BoardCreatePage = () => {
         navigate(`/board/${postId}`); // 작성한 게시글 상세 페이지로 이동
     };
 
-    return <BoardForm onSubmit={handleSubmit} showCategorySelect={true}  />;
+    return (
+        <div className="detail-container p-4 max-w-3xl mx-auto">
+            <BoardForm onSubmit={handleSubmit} showCategorySelect={true}  />
+        </div>
+    );
 };
 
 export default BoardCreatePage;

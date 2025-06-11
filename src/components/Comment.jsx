@@ -57,6 +57,7 @@ const Comment = ({ postId }) => {
           placeholder="댓글을 입력하세요"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
+          style={{ resize: 'none' }}
         />
         <button
           type="submit"

@@ -28,6 +28,7 @@
   line-height: 1.7;
   color: #333;
   white-space: pre-wrap;
+  width: -webkit-fill-available;
 }
 
 .back-button {
