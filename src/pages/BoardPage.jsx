@@ -73,15 +73,15 @@ function BoardPage() {
   };
 
   const handleWrite = () => {
-    const token = localStorage.getItem('accessToken');
-    console.log('현재 토큰:', token); // 토큰 확인용 로그
+    // const token = localStorage.getItem('accessToken');
+    // console.log('현재 토큰:', token); // 토큰 확인용 로그
 
     // 빈 문자열, null, "null", undefined 다 걸러냄
-    if (!token || token === 'null' || token === 'undefined') {
-      alert('로그인이 필요합니다.');
-      navigate('/login');
-      return;
-    }
+    // if (!token || token === 'null' || token === 'undefined') {
+    //   alert('로그인이 필요합니다.');
+    //   navigate('/login');
+    //   return;
+    // }
 
     navigate('/board/write');
   };

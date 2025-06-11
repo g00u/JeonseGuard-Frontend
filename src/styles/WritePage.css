@@ -53,4 +53,15 @@
   .submit-button:hover {
     background-color: #005dc1;
   }
-  
+
+
+.dropdown {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
