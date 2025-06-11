@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import boardService from '../services/BoardService';
 import Comment from '../components/Comment';
 import '../styles/BoardDetailPage.css';
+import '../styles/BoardPage.css'; // 스타일 적용
 import { useUser } from '../context/UserContext';
 import heartImg from '../assets/heart.png';
 
@@ -32,11 +33,11 @@ const BoardDetailPage = () => {
 
   // 게시글 상세 불러오기
   useEffect(() => {
-    // if (!user) {
-    //   alert('로그인이 필요합니다.');
-    //   navigate('/login'); // 로그인 페이지로 리다이렉트
-    //   return;
-    // }
+    if (!user) {
+      alert('로그인이 필요합니다.');
+      navigate('/login'); // 로그인 페이지로 리다이렉트
+      return;
+    }
     boardService.getBoardDetail(postId)
       .then(response => {
         setPost(response.data);
@@ -91,7 +92,7 @@ const BoardDetailPage = () => {
       {/* 수정 버튼: 작성자만 표시 */}
       {user?.nickname === post.creator && (
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="back-button"
           onClick={() => navigate(`/${postId}/edit`)}
         >
           수정
@@ -103,7 +104,7 @@ const BoardDetailPage = () => {
       {/* 삭제 버튼: 작성자만 표시 */}
       {user?.nickname === post.creator && (
         <button
-          className="bg-red-500 text-white px-4 py-2 rounded ml-2"
+          className="back-button"
           onClick={handleDelete}
         >
           삭제
@@ -123,10 +124,12 @@ const BoardDetailPage = () => {
           onClick={handleLike}
           disabled={liked}
           className="ml-4"
-          style={{ cursor: liked ? 'not-allowed' : 'pointer' }}
+          style={{ cursor: liked ? 'not-allowed' : 'pointer' , 
+            fontSize: '24px'
+          }}
         >
-          <img src={heartImg} alt="좋아요" width="24" height="24" />
-          <span className="ml-1">{count}</span>
+          💙
+          <span className="back-button">{count}</span>
         </button>
       )}
 

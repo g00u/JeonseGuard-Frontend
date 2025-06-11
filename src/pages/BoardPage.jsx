@@ -12,9 +12,9 @@ function BoardPage() {
   const { user } = useUser(); // 사용자 정보 가져오기
   console.log('현재 사용자:', user); // 현재 사용자 정보 확인
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [selectedTag, setSelectedTag] = useState('');
+  // const [selectedTag, setSelectedTag] = useState('');
 
   const [preventionBoards, setPreventionBoards] = useState([]);
   const [reportBoards, setReportBoards] = useState([]);
@@ -31,7 +31,6 @@ function BoardPage() {
       .then((res) => {
         setReportBoards(res.data.posts[1]);
         console.log('report 불러오기 성공', res.data.posts[1]);
-
       })
       .catch((err) => console.error('report 불러오기 실패', err));
   }, []);
@@ -99,7 +98,7 @@ function BoardPage() {
   // });
 
   //태그 전체 목록 추출
-  const allTags = [...new Set(posts.flatMap((p) => p.tags || []))];
+  // const allTags = [...new Set(posts.flatMap((p) => p.tags || []))];
 
 return (
   <div className="board-container">
@@ -119,7 +118,7 @@ return (
     </div>
 
           {/* 태그 필터 UI */}
-      <div className="tag-filter">
+      {/* <div className="tag-filter">
         <button
           className={selectedTag === '' ? 'tag-button active' : 'tag-button'}
           onClick={() => setSelectedTag('')}
@@ -135,11 +134,10 @@ return (
             {tag}
           </button>
         ))}
-      </div>
+      </div> */}
 
     {/* 글쓰기 버튼 + 검색창을 같이 묶음 */}
     <div className="action-row">
-      <button className="write-button" onClick={handleWrite}>글 작성하기</button>
       <div className="search-wrapper">
         <input
           type="text"
@@ -149,6 +147,7 @@ return (
           className="board-search-input"
         />
       </div>
+      <button style={{backgroundColor:"#1890ff"}} className="write-button" onClick={handleWrite}>글 작성하기</button>
     </div>
 
 

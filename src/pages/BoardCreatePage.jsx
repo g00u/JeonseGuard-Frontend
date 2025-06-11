@@ -6,9 +6,6 @@ import boardService from '../services/BoardService';
 import '../styles/BoardDetailPage.css'; // 스타일 적용
 
 
-
-
-
 const BoardCreatePage = () => {
     const navigate = useNavigate();
 

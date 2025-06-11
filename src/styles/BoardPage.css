@@ -1,6 +1,6 @@
 .board-container {
   max-width: 800px;
-  margin: 40px auto;
+  /* margin: 40px auto; */
   padding: 20px;
   font-family: 'Noto Sans KR', sans-serif;
   color: #333;
@@ -20,6 +20,7 @@
 
 .board-table {
   width: 100%;
+  border-radius: 8px;
   border-collapse: separate;
   border-spacing: 0;
   background-color: white;
@@ -124,7 +125,7 @@
 
 .board-search-input {
   width: 100%;
-  max-width: 300px;
+  max-width: -webkit-fill-available;;
   padding: 10px 14px;
   font-size: 16px;
   border: 1.5px solid #ccc;
@@ -133,7 +134,7 @@
   transition: box-shadow 0.2s ease;
   /* margin 제거 - flex 내부니까 필요 없음 */
   display: block; /* 유지 가능 */
-  margin-bottom: 5%;
+  /* margin-bottom: 5%; */
 }
 
 
@@ -262,4 +263,16 @@
   padding: 2px 6px;
   margin-right: 6px;
   border-radius: 6px;
+}
+
+.custom-button {
+  margin-top: 0.5rem;       /* mt-2 */
+  padding-left: 1rem;       /* px-4 */
+  padding-right: 1rem;
+  padding-top: 0.5rem;      /* py-2 */
+  padding-bottom: 0.5rem;
+  background-color: #3b82f6; /* bg-blue-500 */
+  color: white;             /* text-white */
+  border-radius: 0.25rem;   /* rounded */
+  border: none;             /* border-none */
 }
