@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/WritePage.css'; 
+import '../styles/BoardPage.css'; 
 
 
 const BoardForm = ({ initialData = {}, onSubmit, showCategorySelect = false, author }) => {
@@ -54,9 +55,9 @@ const BoardForm = ({ initialData = {}, onSubmit, showCategorySelect = false, aut
                 <br/>
 
                 <button className="back-button" onClick={() => navigate(-1)}>
-                    <span className="back-icon">←</span> 뒤로가기
+                    <span className="back-icon">←</span> 취소
                 </button>
-                <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+                <button  style={{backgroundColor:"#1890ff"}}  type="submit" className="back-button">
                     작성하기
                 </button>
                 
