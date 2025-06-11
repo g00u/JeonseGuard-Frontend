@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MyPage.css';
-import { FaFileAlt, FaCommentDots, FaHistory, FaUser } from 'react-icons/fa'; 
+import { FaFileAlt, FaCommentDots, FaInfoCircle, FaUser } from 'react-icons/fa'; 
 
 
 const MyPage = () => {
@@ -69,8 +69,8 @@ const MyPage = () => {
             </div>
 
             <div className="section-card" onClick={() => navigate('/mypage/history')}>
-              <FaHistory className="section-icon" />
-              분석 히스토리 보기
+              <FaInfoCircle className="section-icon" />
+               JeonseGuard 안내 및 문의하기
             </div>
           </div>
         </>
