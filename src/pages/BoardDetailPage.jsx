@@ -5,7 +5,7 @@ import Comment from '../components/Comment';
 import '../styles/BoardDetailPage.css';
 import '../styles/BoardPage.css'; // 스타일 적용
 import { useUser } from '../context/UserContext';
-import heartImg from '../assets/heart.png';
+// import heartImg from '../assets/heart.png';
 
 
 const BoardDetailPage = () => {
@@ -15,6 +15,7 @@ const BoardDetailPage = () => {
   const [count, setCount] = useState(0); // 초기값 0으로 설정
   const navigate = useNavigate();
   const { user } = useUser();
+  const accesssToken = localStorage.getItem('accessToken'); // 토큰 가져오기
 
   const handleDelete = () => {
   const confirmDelete = window.confirm('정말로 이 게시글을 삭제하시겠습니까?');
@@ -33,7 +34,7 @@ const BoardDetailPage = () => {
 
   // 게시글 상세 불러오기
   useEffect(() => {
-    if (!user) {
+    if (!user || !accesssToken) {
       alert('로그인이 필요합니다.');
       navigate('/login'); // 로그인 페이지로 리다이렉트
       return;
@@ -46,7 +47,7 @@ const BoardDetailPage = () => {
       .catch(error => {
         console.error('API 호출 실패:', error);
       });
-  }, [user, navigate, postId]);
+  }, [user, navigate, postId, accesssToken]);
 
   // 좋아요 여부 확인 (localStorage)
   useEffect(() => {
