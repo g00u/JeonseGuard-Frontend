@@ -16,7 +16,8 @@ const MyPosts = () => {
       try {
         const preventionRes = await BoardService.getBoards('prevention');
         const reportRes = await BoardService.getBoards('report');
-
+        console.log('preventionRes:', preventionRes);
+        console.log('reportRes:', reportRes);
         const preventionPosts = preventionRes.data.posts[1] || [];
         const reportPosts = reportRes.data.posts[1] || [];
 
@@ -31,12 +32,12 @@ const MyPosts = () => {
   }, []);
 
   // 내 게시글 필터링
-  const myPostsOnly = mypost.filter(post => post.creator === user.name);
+  const myPostsOnly = mypost.filter(post => post.creator === user.nickname);
 
   // 내 댓글 필터링
   const myCommentsOnly = mypost.flatMap(post =>
     (post.comments || [])
-      .filter(comment => comment.creator === user.name)
+      .filter(comment => comment.creator === user.nickname)
       .map(comment => ({
         ...comment,
         postId: post.postId,
