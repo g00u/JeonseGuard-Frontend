@@ -29,6 +29,8 @@
   color: #333;
   white-space: pre-wrap;
   width: -webkit-fill-available;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .back-button {
