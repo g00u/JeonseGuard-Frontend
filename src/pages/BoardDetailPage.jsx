@@ -116,7 +116,7 @@ const BoardDetailPage = () => {
 
       {/* 뒤로가기 버튼 */}
       <button className="back-button" onClick={() => navigate(-1)}>
-        <span className="back-icon">←</span> 뒤로가기
+        <span className="back-icon">◀️</span>
       </button>
 
       {/* 좋아요 버튼: 작성자 제외, 중복 방지 */}
