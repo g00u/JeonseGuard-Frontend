@@ -70,7 +70,7 @@ const MyPosts = () => {
         <>
           {paginatedPosts.map(post => (
             <div className="post-card" key={post.postId}>
-              <div onClick={handleNav(post.postId)}><strong>{post.title}</strong> ({post.creator})</div><br />
+              <strong onClick={handleNav(post.postId)}>{post.title}</strong> ({post.creator})<br />
               <small>{new Date(post.createdDateTime).toLocaleString()}</small>
             </div>
           ))}
