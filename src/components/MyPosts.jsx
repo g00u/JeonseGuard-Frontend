@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
 import BoardService from '../services/BoardService';
 import '../styles/MyPosts.css';
+import { useNavigate } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 5; // 페이지당 표시할 항목 수
 
@@ -10,6 +11,7 @@ const MyPosts = () => {
   const [mypost, setMypost] = useState([]);
   const [postPage, setPostPage] = useState(1);
   const [commentPage, setCommentPage] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBoards = async () => {
@@ -34,6 +36,10 @@ const MyPosts = () => {
   // 내 게시글 필터링
   const myPostsOnly = mypost.filter(post => post.creator === user.nickname);
 
+  const handleNav = (e) => {
+    navigate(`/board/${e}`);
+  }
+
   // 내 댓글 필터링
   const myCommentsOnly = mypost.flatMap(post =>
     (post.comments || [])
@@ -56,14 +62,14 @@ const MyPosts = () => {
 
   return (
     <div className="mypage-subpage">
-      <h2>📄 내 게시글 보기</h2>
+      <h2>내 게시글 보기</h2>
 
       {myPostsOnly.length === 0 ? (
         <p>작성한 게시글이 없습니다.</p>
       ) : (
         <>
           {paginatedPosts.map(post => (
-            <div className="post-card" key={post.postId}>
+            <div onClick={handleNav(post.postId)} className="post-card" key={post.postId}>
               <strong>{post.title}</strong> ({post.creator})<br />
               <small>{new Date(post.createdDateTime).toLocaleString()}</small>
             </div>
@@ -86,8 +92,8 @@ const MyPosts = () => {
 
       <hr />
 
-      <h2>💬 내 댓글 보기</h2>
-
+      {/* <h2>💬 내 댓글 보기</h2> */}
+{/* 
       {myCommentsOnly.length === 0 ? (
         <p>작성한 댓글이 없습니다.</p>
       ) : (
@@ -102,10 +108,10 @@ const MyPosts = () => {
               ({comment.creator})<br />
               <small>📌 {comment.postTitle}</small>
             </div>
-          ))}
+          ))} */}
 
           {/* 댓글 페이지네이션 */}
-          <div className="pagination">
+          {/* <div className="pagination">
             {Array.from({ length: Math.ceil(myCommentsOnly.length / ITEMS_PER_PAGE) }).map((_, idx) => (
               <button
                 key={idx}
@@ -115,9 +121,9 @@ const MyPosts = () => {
                 {idx + 1}
               </button>
             ))}
-          </div>
-        </>
-      )}
+          </div> */}
+        {/* </>
+      )} */}
     </div>
   );
 };
