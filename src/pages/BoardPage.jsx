@@ -5,6 +5,8 @@ import '../styles/BoardPage.css';
 import { useNavigate } from 'react-router-dom';
 import BoardService from '../services/BoardService'; // 실제 서비스 경로로 변경
 import { useUser } from '../context/UserContext';
+import heartImg from '../assets/heart.png';
+import commentImg from '../assets/comment.png';
 
 
 function BoardPage() {
@@ -39,17 +41,17 @@ function BoardPage() {
     <table className="board-table table table-striped table-bordered">
       <thead>
         <tr>
-          <th>글 번호</th>
-          <th>타이틀</th>
-          <th>댓글 수</th>
-          <th>좋아요 수</th>
+          {/* <th>글 번호</th> */}
+          <th>제목 </th>
+          <th><img src={commentImg} alt='comment count' /></th>
+          <th><img src={heartImg} alt='heart count' /></th>
         </tr>
       </thead>
       <tbody>
         {boards?.map((board, index) => (
         
           <tr key={board.postId} onClick={() => handleClick(board.postId)} style={{ cursor: 'pointer' }}>
-            <td>{board.postId}</td>
+            {/* <td>{board.postId}</td> */}
             <td>{board.title}</td>
             <td>{board.commentCount}</td>
             <td>{board.heartCount}</td>
@@ -72,15 +74,15 @@ function BoardPage() {
   };
 
   const handleWrite = () => {
-    // const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
     // console.log('현재 토큰:', token); // 토큰 확인용 로그
 
     // 빈 문자열, null, "null", undefined 다 걸러냄
-    // if (!token || token === 'null' || token === 'undefined') {
-    //   alert('로그인이 필요합니다.');
-    //   navigate('/login');
-    //   return;
-    // }
+    if (!token || token === 'null' || token === 'undefined') {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+      return;
+    }
 
     navigate('/board/write');
   };
