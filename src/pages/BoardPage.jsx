@@ -114,6 +114,7 @@ function BoardPage() {
       navigate('/login');
       return;
     }
+    // return navigate(`/board/${postId}`); // 게시글 상세 페이지로 이동
 
     // 2.토큰 만료 사용자 처리 
     // checkUserToken에서 받아온 토큰으로 유효한지 확인하는 코드 작성
@@ -140,6 +141,7 @@ function BoardPage() {
       navigate('/login');
       return;
     }
+    // return navigate('/board/write');
 
     // 2.토큰 만료 사용자 처리 
     // checkUserToken에서 받아온 토큰으로 유효한지 확인하는 코드 작성

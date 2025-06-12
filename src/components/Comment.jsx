@@ -3,16 +3,31 @@ import React, { useEffect, useState } from 'react';
 import commentService from '../services/BoardService';
 import { useUser } from '../context/UserContext';
 import '../styles/BoardPage.css';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import boardService from '../services/BoardService'; // 실제 서비스 경로로 변경
 
 const Comment = ({ postId }) => {
   const { user } = useUser();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 //   const token = localStorage.getItem('accessToken');
 
 
+  // const handleDelete = () => {
+  // const confirmDelete = window.confirm('정말로 이 게시글을 삭제하시겠습니까?');
+  // if (!confirmDelete) return;
+
+  // boardService.deleteComment(commentId)
+  //   .then(() => {
+  //     alert('댓글이 삭제되었습니다.');
+  //     navigate(`/board/${postId}`); 
+  //   })
+  //   .catch((error) => {
+  //     console.error('댓글 삭제 실패:', error);
+  //     alert('삭제 중 오류가 발생했습니다.');
+  //   });
+  // };
 
   // 댓글 불러오기
   useEffect(() => {
@@ -78,7 +93,17 @@ const Comment = ({ postId }) => {
           {/* <img src={comment.creator.profileImage} alt='profile'/> */}
           <strong>{comment.creator}</strong>
         </p>
-        <p>{comment.content}</p>
+        <p>{comment.content}</p> 
+        
+        {/* 삭제 버튼: 작성자만 표시 */}
+        {/* {user?.nickname === post.creator && (
+          <button
+            className="back-button"
+            onClick={handleDelete}
+          >
+            삭제
+          </button>
+        )} */}
         <hr/>
       </div>
     ))}

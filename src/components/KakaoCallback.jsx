@@ -52,7 +52,7 @@ const KakaoCallback = () => {
           navigate('/login');
         });
     }
-  }, [code, API_URL, navigate, setUser]);
+  }, [code, navigate, setUser]);
 
   return <LoadingSpinner text="카카오 로그인 처리 중입니다..." />;
 };

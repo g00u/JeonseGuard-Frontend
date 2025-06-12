@@ -53,7 +53,14 @@ class BoardService {
             },
         });
     }
-
+    // deleteComment(commentId) {
+    //     const token = localStorage.getItem('accessToken'); // 토큰 가져오기
+    //     return axios.delete(`${API_URL}/post/${postId}`, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //     });
+    // }
 
     // 6. 게시글 좋아요
     likeBoard(postId) {
@@ -90,16 +97,6 @@ class BoardService {
         },
         });
     }
-
-    // // 5. 게시글 삭제
-    // deleteComment(postId, commentId) {
-    //     const token = localStorage.getItem('accessToken'); // 토큰 가져오기
-    //     return axios.delete(`${API_URL}/comment/${commentId}`, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //         },
-    //     });
-    // }
 
 }
 const boardService = new BoardService();
