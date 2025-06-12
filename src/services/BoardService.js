@@ -3,6 +3,16 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
 class BoardService {
+    // 0.사용자 토큰 확인
+    checkUserToken() {
+        const token = localStorage.getItem('accessToken');
+        return axios.get(`${API_URL}/user/info`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
     // 1. 카테고리별 게시글 전체 조회
     getBoards(category) {
         return axios.get(`${API_URL}/board/${category}`);
@@ -43,7 +53,14 @@ class BoardService {
             },
         });
     }
-
+    // deleteComment(commentId) {
+    //     const token = localStorage.getItem('accessToken'); // 토큰 가져오기
+    //     return axios.delete(`${API_URL}/post/${postId}`, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //     });
+    // }
 
     // 6. 게시글 좋아요
     likeBoard(postId) {
@@ -80,16 +97,6 @@ class BoardService {
         },
         });
     }
-
-    // // 5. 게시글 삭제
-    // deleteComment(postId, commentId) {
-    //     const token = localStorage.getItem('accessToken'); // 토큰 가져오기
-    //     return axios.delete(`${API_URL}/comment/${commentId}`, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //         },
-    //     });
-    // }
 
 }
 const boardService = new BoardService();

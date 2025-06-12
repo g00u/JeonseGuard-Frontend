@@ -4,6 +4,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
+    // UserContext.js
+  // const initialUser = JSON.parse(localStorage.getItem('dummyUser')) || null;
+
+  // const [user, setUserState] = useState(initialUser);
+
   const [user, setUserState] = useState(null);
 
   // setUser 함수 정의: 상태 변경 + localStorage에 저장

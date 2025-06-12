@@ -3,6 +3,7 @@ import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MyPage.css';
 import { FaFileAlt, FaCommentDots, FaInfoCircle, FaUser } from 'react-icons/fa'; 
+import BoardService from '../services/BoardService'; 
 
 
 const MyPage = () => {
@@ -12,10 +13,30 @@ const MyPage = () => {
 
  
   useEffect(() =>{
-    if(!user) {
+   const token = localStorage.getItem('accessToken');
+    // console.log('현재 토큰:', token); // 토큰 확인용 로그
+
+    // 1.로그인 안한 사용자 처리리
+    if (!token || token === 'null' || token === 'undefined') {
+      alert('로그인이 필요합니다.');
       navigate('/login');
+      return;
     }
-  }, [user, navigate]);
+
+    // 2.토큰 만료 사용자 처리 
+    // checkUserToken에서 받아온 토큰으로 유효한지 확인하는 코드 작성
+    BoardService.checkUserToken()
+      // .then((res) => { //200 OK
+      //   console.log('토큰 유효성 검사 성공:', res.data);
+      //     navigate('/board/write');
+
+      // })
+      // .catch((err) => { // 401 Unauthorized
+      //   console.error('토큰 유효성 검사 실패:', err);
+      //   alert('로그인을 다시 해주세요. '); 
+      //   navigate('/login'); 
+      // });
+  }, [navigate]);
 
 
   

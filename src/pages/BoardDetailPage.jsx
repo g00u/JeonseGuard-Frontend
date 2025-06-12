@@ -34,11 +34,11 @@ const BoardDetailPage = () => {
 
   // 게시글 상세 불러오기
   useEffect(() => {
-    if (!user || !accesssToken) {
-      alert('로그인이 필요합니다.');
-      navigate('/login'); // 로그인 페이지로 리다이렉트
-      return;
-    }
+    // if (!user || !accesssToken) {
+    //   alert('로그인이 필요합니다.');
+    //   navigate('/login'); // 로그인 페이지로 리다이렉트
+    //   return;
+    // }
     boardService.getBoardDetail(postId)
       .then(response => {
         setPost(response.data);
@@ -124,13 +124,12 @@ const BoardDetailPage = () => {
         <button
           onClick={handleLike}
           disabled={liked}
-          className="ml-4"
+          className="back-button"
           style={{ cursor: liked ? 'not-allowed' : 'pointer' , 
             fontSize: '24px'
           }}
         >
-          💙
-          <span className="back-button">{count}</span>
+          💙 {count}
         </button>
       )}
 
