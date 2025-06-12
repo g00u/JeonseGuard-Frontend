@@ -62,7 +62,9 @@ const Comment = ({ postId }) => {
         <button
           type="submit"
           className="back-button "
-           style={{backgroundColor:"#1890ff"}} 
+           style={{backgroundColor:"#1890ff",
+            color:'white'
+           }} 
         >
           댓글 작성
         </button>

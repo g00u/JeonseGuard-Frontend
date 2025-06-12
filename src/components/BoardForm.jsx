@@ -57,7 +57,11 @@ const BoardForm = ({ initialData = {}, onSubmit, showCategorySelect = false, aut
                 <button className="back-button" onClick={() => navigate(-1)}>
                     <span className="back-icon">←</span> 취소
                 </button>
-                <button  style={{backgroundColor:"#1890ff"}}  type="submit" className="back-button">
+                <button  
+                style={{backgroundColor:"#1890ff",
+                    color:'white'
+
+                }}  type="submit" className="back-button">
                     작성하기
                 </button>
                 

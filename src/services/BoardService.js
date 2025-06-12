@@ -3,6 +3,16 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
 class BoardService {
+    // 0.사용자 토큰 확인
+    checkUserToken() {
+        const token = localStorage.getItem('accessToken');
+        return axios.get(`${API_URL}/user/info`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
     // 1. 카테고리별 게시글 전체 조회
     getBoards(category) {
         return axios.get(`${API_URL}/board/${category}`);

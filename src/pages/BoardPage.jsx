@@ -18,8 +18,14 @@ function BoardPage() {
   const [searchKeyword, setSearchKeyword] = useState('');
   // const [selectedTag, setSelectedTag] = useState('');
 
+  // 게시글 가져오기 
   const [preventionBoards, setPreventionBoards] = useState([]);
   const [reportBoards, setReportBoards] = useState([]);
+
+  // 페이지네이션
+  const [preventionPage, setPreventionPage] = useState(1);
+  const [reportPage, setReportPage] = useState(1);
+  const postsPerPage = 3;
 
   useEffect(() => {
     BoardService.getBoards('prevention')
@@ -37,30 +43,59 @@ function BoardPage() {
       .catch((err) => console.error('report 불러오기 실패', err));
   }, []);
 
-  const renderBoardTable = (boards) => (
-    <table className="board-table table table-striped table-bordered">
-      <thead>
-        <tr>
-          {/* <th>글 번호</th> */}
-          <th>제목 </th>
-          <th><img src={commentImg} alt='comment count' /></th>
-          <th><img src={heartImg} alt='heart count' /></th>
-        </tr>
-      </thead>
-      <tbody>
-        {boards?.map((board, index) => (
-        
-          <tr key={board.postId} onClick={() => handleClick(board.postId)} style={{ cursor: 'pointer' }}>
-            {/* <td>{board.postId}</td> */}
-            <td>{board.title}</td>
-            <td>{board.commentCount}</td>
-            <td>{board.heartCount}</td>
-          </tr>
-          
+  const renderBoardTable = (boards, currentPage, setPage) => {
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const currentBoards = boards?.slice(startIndex, startIndex + postsPerPage);
+
+    return (
+      <>
+        <table className="board-table table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th><img src={commentImg} alt='comment count' /></th>
+              <th><img src={heartImg} alt='heart count' /></th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentBoards?.map((board) => (
+              <tr
+                key={board.postId}
+                onClick={() => handleClick(board.postId)}
+                style={{ cursor: 'pointer' }}
+              >
+                <td>{board.title}</td>
+                <td>{board.commentCount}</td>
+                <td>{board.heartCount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {renderPagination(boards, currentPage, setPage)}
+      </>
+    );
+  };
+
+
+  const renderPagination = (totalPosts, currentPage, setPage) => {
+    const totalPages = Math.ceil(totalPosts.length / postsPerPage);
+
+
+    return (
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, idx) => (
+          <button
+            key={idx + 1}
+            onClick={() => setPage(idx + 1)}
+            className={currentPage === idx + 1 ? 'active-page' : ''}
+          >
+            {idx + 1}
+          </button>
         ))}
-      </tbody>
-    </table>
-  );
+      </div>
+    );
+  };
+
 
   //   useEffect(() => {
   //   fetch('/data/dummyPosts.json') // public/data 안의 JSON 파일 접근
@@ -70,21 +105,55 @@ function BoardPage() {
   // }, []);
 
   const handleClick = (postId) => {
-    navigate(`/board/${postId}`);
-  };
-
-  const handleWrite = () => {
     const token = localStorage.getItem('accessToken');
     // console.log('현재 토큰:', token); // 토큰 확인용 로그
 
-    // 빈 문자열, null, "null", undefined 다 걸러냄
+    // 1.로그인 안한 사용자 처리리
     if (!token || token === 'null' || token === 'undefined') {
       alert('로그인이 필요합니다.');
       navigate('/login');
       return;
     }
 
-    navigate('/board/write');
+    // 2.토큰 만료 사용자 처리 
+    // checkUserToken에서 받아온 토큰으로 유효한지 확인하는 코드 작성
+    BoardService.checkUserToken()
+      .then((res) => { //200 OK
+        console.log('토큰 유효성 검사 성공:', res.data);
+          navigate(`/board/${postId}`);
+
+      })
+      .catch((err) => { // 401 Unauthorized
+        console.error('토큰 유효성 검사 실패:', err);
+        alert('로그인을 다시 해주세요. '); 
+        navigate('/login'); 
+      });
+  };
+
+  const handleWrite = () => {
+    const token = localStorage.getItem('accessToken');
+    // console.log('현재 토큰:', token); // 토큰 확인용 로그
+
+    // 1.로그인 안한 사용자 처리리
+    if (!token || token === 'null' || token === 'undefined') {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+      return;
+    }
+
+    // 2.토큰 만료 사용자 처리 
+    // checkUserToken에서 받아온 토큰으로 유효한지 확인하는 코드 작성
+    BoardService.checkUserToken()
+      .then((res) => { //200 OK
+        console.log('토큰 유효성 검사 성공:', res.data);
+          navigate('/board/write');
+
+      })
+      .catch((err) => { // 401 Unauthorized
+        console.error('토큰 유효성 검사 실패:', err);
+        alert('로그인을 다시 해주세요. '); 
+        navigate('/login'); 
+      });
   };
 
 
@@ -140,7 +209,7 @@ return (
 
     {/* 글쓰기 버튼 + 검색창을 같이 묶음 */}
     <div className="action-row">
-      <div className="search-wrapper">
+      {/* <div className="search-wrapper">
         <input
           type="text"
           placeholder="검색어를 입력해주세요"
@@ -148,8 +217,11 @@ return (
           onChange={(e) => setSearchKeyword(e.target.value)}
           className="board-search-input"
         />
-      </div>
-      <button style={{backgroundColor:"#1890ff"}} className="write-button" onClick={handleWrite}>글 작성하기</button>
+      </div> */}
+      <button style={{backgroundColor:"#1890ff", width:'100%'}} 
+      className="write-button" onClick={handleWrite}>
+        글 작성하기
+      </button>
     </div>
 
 
@@ -183,18 +255,19 @@ return (
 
 
 
-    <div> {/* 게시글 일부 출력 */}
-      <h2 className="text-center">🛡️예방 게시판 </h2>
+    <div>
+      <h2 className="text-center">🛡️예방 게시판</h2>
       <div className="row">
-        {renderBoardTable(preventionBoards)}
+        {renderBoardTable(preventionBoards, preventionPage, setPreventionPage)}
       </div>
 
       <hr />
-      <h2 className="text-center">📞신고 게시판 </h2>
+      <h2 className="text-center">📞신고 게시판</h2>
       <div className="row">
-        {renderBoardTable(reportBoards)}
+        {renderBoardTable(reportBoards, reportPage, setReportPage)}
       </div>
     </div>
+
   </div>
 );
 
